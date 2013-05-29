@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Set App</string>
+    <string name="action_settings">Settings</string>
+    <string name="play_button">New Game</string>
+    <string name="title_activity_play_game">PlayGameActivity</string>
+    <string name="default_button">I am a button!</string>
+    <string name="num_sets">0</string>
+
+</resources>
