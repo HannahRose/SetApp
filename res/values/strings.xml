@@ -7,5 +7,6 @@
     <string name="title_activity_play_game">PlayGameActivity</string>
     <string name="default_button">I am a button!</string>
     <string name="num_sets">Sets found: 0</string>
+    <string name="resume_button">Resume Game</string>
 
 </resources>

@@ -8,13 +8,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-
-    <Button
+    
+    <Button android:id="@+id/newgamebutton"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/play_button"  
-        android:onClick="startNewGame" >
-    </Button>   
+        android:onClick="playGame" 
+        android:visibility="visible" >
+    </Button>
+    
+    <Button android:id="@+id/resumebutton"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resume_button"  
+        android:onClick="playGame" 
+        android:visibility="gone" >
+    </Button> 
     
 </RelativeLayout>

@@ -5,14 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 	
-	//private boolean gameInProgress = false;
+	private boolean gameInProgress = false;
+	private final int INVISIBLE = 4;
+	private final int VISIBLE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	
+    	// Change the text on the main button depending on whether
+    	// or not a game is in progress already.
+    	if (gameInProgress) {
+    		Button play = (Button) findViewById(R.id.newgamebutton);
+    		Button resume = (Button) findViewById(R.id.resumebutton);
+    		
+    		play.setVisibility(INVISIBLE);
+    		resume.setVisibility(VISIBLE);
+    	}
+    	
     	setContentView(R.layout.activity_main);
     }
 
@@ -24,10 +38,12 @@ public class MainActivity extends Activity {
     }
     
     /** Switch to a new activity to start a game. */
-    public void startNewGame(View view) {
+    public void playGame(View view) {
     	Intent intent = new Intent(this, PlayGameActivity.class);
-    	//gameInProgress = true;
+    	gameInProgress = true;
     	startActivity(intent);
     }
+    
+    // FIXME Remember to reset buttons when game is over!
     
 }
