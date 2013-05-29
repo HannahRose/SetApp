@@ -8,6 +8,8 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+
 public class PlayGameActivity extends Activity {
 	
 	private Deck deck;
@@ -63,6 +65,11 @@ public class PlayGameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	/*
+	public void selectCard(View view) {
+		
+	} */
 	
 	private void dealCards() {
 		//for empty spot in cards table
