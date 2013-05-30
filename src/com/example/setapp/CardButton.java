@@ -25,6 +25,8 @@ public class CardButton extends ImageButton {
 	/** The rectangle representing the CardButton. */
 	private Rect cardRect;
 	
+	private boolean selected = false;	// Cards are not selected by default.
+	
 	public CardButton(Context context) {
 		super(context);
 		
@@ -75,6 +77,14 @@ public class CardButton extends ImageButton {
 		return (myCard != null);
 	}
 	
+	/** Returns information about whether or not the button is selected.
+	 * 
+	 * @return True if the card is selected, otherwise false.
+	 */
+	public boolean isSelected() {
+		return selected;
+	}
+	
 	/** Draws the button on the screen (FIXME we hope?).
 	 * 
 	 * @param canvas The Canvas on which to draw the button.
@@ -84,8 +94,17 @@ public class CardButton extends ImageButton {
 		
 		canvas.drawRect(cardRect, background);
 		myCard.draw();
+		
+		if (selected) {
+			//do something special
+		}
 	}
 	
-//	private void onClick()
+	// Occurs when a button containing a card is clicked.
+	// If the card is not selected, it should become selected. 
+	// Otherwise it should become unselected.
+	public void setSelected(boolean b) {
+		selected = b;
+	}
 
 }

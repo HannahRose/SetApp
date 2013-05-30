@@ -24,9 +24,7 @@ public class Card {
 	private static Shape shape;
 	
 	private static Fill fill;
-	
-	private boolean selected = false;	// Cards are not selected by default.
-	
+		
 	/** Constructor for Card objects. */
 	public Card(int thisNum, Color thisColor, Shape thisShape, Fill thisFill) {
 		
@@ -37,13 +35,6 @@ public class Card {
 		color = thisColor;
 		shape = thisShape;
 		fill = thisFill;
-	}
-	
-	// Occurs when a button containing a card is clicked.
-	// If the card is not selected, it will become selected. 
-	// Otherwise it will be unselected.
-	public void select() {
-		selected = !(selected);
 	}
 	
 	public void draw() {
@@ -67,10 +58,6 @@ public class Card {
 	
 	public Fill getFill() {
 		return fill;
-	}
-	
-	public boolean isSelected() {
-		return selected;
 	}
 	
 	public String toString() {
