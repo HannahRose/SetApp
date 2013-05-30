@@ -4,9 +4,10 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+//import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TableLayout;
 
 
 
@@ -60,7 +61,7 @@ public class PlayGameActivity extends Activity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
-			NavUtils.navigateUpFromSameTask(this);
+			//NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -70,12 +71,20 @@ public class PlayGameActivity extends Activity {
 	public void selectCard(View view) {
 		
 	} */
-	
+	// Assumes that all elements in the Table Layout are CardButtons.
 	private void dealCards() {
-		//for empty spot in cards table
-			//if the deck is not empty
-				//get the top card from the deck and add it to that spot
-		deck.getTopCard(); //hack for now!
+		
+		TableLayout myLayout = (TableLayout) findViewById(R.id.tableLayout);
+		
+		for (int i = 0; i < myLayout.getChildCount(); i++) {
+			CardButton c = (CardButton) myLayout.getChildAt(i);
+			
+			if (!c.hasCard()) {
+				c.setCard(deck.getTopCard());
+			}
+		}
+		
+		// Does it automatically draw all cards??
 	}
 
 }
