@@ -49,4 +49,8 @@ public class Deck {
 	public Card getTopCard() {
 			return deck.pop();
 	}
+	
+	public int size() {
+		return deck.size();
+	}
 }

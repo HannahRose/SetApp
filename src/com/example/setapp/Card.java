@@ -29,6 +29,10 @@ public class Card {
 	
 	/** Constructor for Card objects. */
 	public Card(int thisNum, Color thisColor, Shape thisShape, Fill thisFill) {
+		
+		// The number must be between 1 and 3.
+		assert((0 < thisNum) && (thisNum < 3));
+		
 		number = thisNum;
 		color = thisColor;
 		shape = thisShape;
@@ -63,6 +67,10 @@ public class Card {
 	
 	public boolean isSelected() {
 		return selected;
+	}
+	
+	public String toString() {
+		return number + " " + color + " " + fill + " " + shape + "S.";
 	}
 	
 	//////////////////////////////////////
