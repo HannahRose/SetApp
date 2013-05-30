@@ -46,6 +46,10 @@ public class Card {
 		selected = !(selected);
 	}
 	
+	public void draw() {
+		//FIXME
+	}
+	
 	/** Retrieve information about the card. */ 
 	///////////////////////////////////
 	
