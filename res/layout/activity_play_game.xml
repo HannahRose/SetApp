@@ -1,7 +1,7 @@
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tableLayout1"
+    android:id="@+id/tableLayout"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center_vertical"
@@ -19,23 +19,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" >
     	
-    	<Button android:id="@+id/buttonA1"
+    	<CardButton android:id="@+id/buttonA1"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
-    	<Button android:id="@+id/buttonB1"
+    	<CardButton android:id="@+id/buttonB1"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
-    	<Button android:id="@+id/buttonC1"
+    	<CardButton android:id="@+id/buttonC1"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
     </TableRow>
     
@@ -45,23 +45,23 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center" >
     	
-    	<Button android:id="@+id/buttonA2"
+    	<CardButton android:id="@+id/buttonA2"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
-    	<Button android:id="@+id/buttonB2"
+    	<CardButton android:id="@+id/buttonB2"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
-    	<Button android:id="@+id/buttonC2"
+    	<CardButton android:id="@+id/buttonC2"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
     </TableRow>
     
@@ -71,29 +71,23 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center" >
     	
-    	<ImageButton android:id="@+id/buttonA3"
+    	<CardButton android:id="@+id/buttonA3"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:text="@drawable/default_button" >    	</ImageButton>
+        	android:text="@string/default_button" >    	</CardButton>
     	
-    	<Button android:id="@+id/buttonB3"
+    	<CardButton android:id="@+id/buttonB3"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
-    	<Button android:id="@+id/buttonC3"
+    	<CardButton android:id="@+id/buttonC3"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/default_button" >
-    	</Button>
+    	</CardButton>
     	
     </TableRow>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-		android:layout_gravity="bottom|center_horizontal|fill_vertical"
-        android:text="@string/num_sets" />
     
 </TableLayout>

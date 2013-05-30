@@ -6,12 +6,15 @@ import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
 import com.example.setapp.Card.Shape;
 
+/** A class that holds a stack of cards. */
 public class Deck {
 
+	/** The total (maximum) number of cards that will be in the deck. */
 	private final int NUMCARDS = 81;
 	
 	private Stack<Card> deck;
 	
+	/** Creates a new deck of cards and shuffles them. */
 	public Deck() {
 
 		deck = new Stack<Card>();
@@ -45,11 +48,15 @@ public class Deck {
 		}
 	}
 		
-	
+	// Precondition: there is at least one card left in the deck.
 	public Card getTopCard() {
 			return deck.pop();
 	}
 	
+	/** Gives the size of the deck. 
+	 * 
+	 * @return The number of cards currently in the stack representing the deck.
+	 */
 	public int size() {
 		return deck.size();
 	}
