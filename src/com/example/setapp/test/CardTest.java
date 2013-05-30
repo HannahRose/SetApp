@@ -24,7 +24,7 @@ public class CardTest extends TestCase {
 	}
 	
 	public CardTest() {
-		super();
+		super("com.example.setapp");
 	}
 	
 	//Test creating a valid card.
@@ -40,7 +40,7 @@ public class CardTest extends TestCase {
 			assertEquals("The card has the wrong fill.", Fill.SOLID, myCard.getFill());	
 		}
 		catch (Exception e) {
-			fail("Constructor threw an exception.");
+			fail("Constructor threw an exception or data was not accessible.");
 		}
 	}
 	

@@ -9,8 +9,13 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 	
+	/** Flag indicating whether or not there is already a game in progress. */
 	private boolean gameInProgress = false;
+	
+	/** The integer value to indicate an invisible button. */
 	private final int INVISIBLE = 4;
+	
+	/** The integer value to indicate a visible button. */
 	private final int VISIBLE = 0;
 
     @Override
@@ -37,7 +42,10 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    /** Switch to a new activity to start a game. */
+    /** Switch to a new activity to start a game. 
+     * 
+     * @param view The current view.
+     */
     public void playGame(View view) {
     	Intent intent = new Intent(this, PlayGameActivity.class);
     	gameInProgress = true;

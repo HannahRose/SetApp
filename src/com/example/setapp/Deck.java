@@ -48,7 +48,10 @@ public class Deck {
 		}
 	}
 		
-	// Precondition: there is at least one card left in the deck.
+	/** Removes and returns the top Card in the deck. 
+	 * Precondition: there is at least one card left in the deck.
+	 * @return The card that was on top of the deck. S
+	 */
 	public Card getTopCard() {
 			return deck.pop();
 	}
