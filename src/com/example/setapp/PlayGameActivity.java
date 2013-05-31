@@ -18,6 +18,8 @@ public class PlayGameActivity extends Activity {
 	
 	private int selected = 0;	// The game always begins with zero cards selected.
 	
+	private Vector<CardButton> cardsSelected = new Vector<CardButton>();
+	
 	//private int totalCards = 12;
 	
 	//private numSets = 0;	// Zero sets found so far. 
@@ -81,16 +83,23 @@ public class PlayGameActivity extends Activity {
 				if (c.isSelected()) {
 					c.setSelected(false);
 					selected--;
+					cardsSelected.remove(c);
 				}
 				else {
 					c.setSelected(true);
 					selected++;
+					cardsSelected.add(c);
 				}
 			}
 			
 			if (selected == 3) {
-				//check if there is a set
-				//if a set, flash and redeal, update numsetsfound
+				
+				boolean result = checkIfSet();
+				
+				if (result) {
+					//if a set, flash and redeal, update numsetsfound
+
+				}
 				//else display "not a set!" message, unselect all 
 			}
 		}
@@ -123,6 +132,15 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		// Does it automatically draw all cards??
+	}
+	
+	/** Checks if the selected cards form a valid set. 
+	 * 
+	 * @return True if the three selected cards are a set, otherwise false. 
+	 */
+	private boolean checkIfSet() {
+		
+		return false;	//HACK FIXME
 	}
 
 }
