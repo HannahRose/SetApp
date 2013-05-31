@@ -15,78 +15,54 @@
 	
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        style="@style/TableStyle" >
     	
-    	<CardButton android:id="@+id/buttonA1"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonA1"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonB1"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonB1"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonC1"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonC1"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
     </TableRow>
     
     <TableRow
         android:id="@+id/tableRow2"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center" >
+        style="@style/TableStyle" >
     	
-    	<CardButton android:id="@+id/buttonA2"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonA2"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonB2"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonB2"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonC2"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonC2"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
     </TableRow>
     
     <TableRow
         android:id="@+id/tableRow3"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center" >
+        style="@style/TableStyle" >
     	
-    	<CardButton android:id="@+id/buttonA3"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonA3"
+        	style="@style/CardStyle" >    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonB3"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonB3"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
-    	<CardButton android:id="@+id/buttonC3"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/default_button" >
-    	</CardButton>
+    	<com.example.setapp.CardView android:id="@+id/buttonC3"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
     	
     </TableRow>
     
