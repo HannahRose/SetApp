@@ -15,12 +15,8 @@ import android.view.View;
 public class PlayGameActivity extends Activity {
 	
 	private Deck deck;
-	
-	private int selected = 0;	// The game always begins with zero cards selected.
-	
-	private Vector<CardButton> cardsSelected = new Vector<CardButton>();
-	
-	//private int totalCards = 12;
+		
+	private Vector<CardButton> selected = new Vector<CardButton>();
 	
 	//private numSets = 0;	// Zero sets found so far. 
 	
@@ -79,20 +75,18 @@ public class PlayGameActivity extends Activity {
 		if (view instanceof CardButton) {
 			CardButton c = (CardButton) view;
 			
-			if (c.hasCard()) { //only select a button if it has a corresponding card
+			if (c.hasCard()) { //only select or unselect a button if it has a corresponding card
 				if (c.isSelected()) {
 					c.setSelected(false);
-					selected--;
-					cardsSelected.remove(c);
+					selected.remove(c);
 				}
 				else {
 					c.setSelected(true);
-					selected++;
-					cardsSelected.add(c);
+					selected.add(c);
 				}
 			}
 			
-			if (selected == 3) {
+			if (selected.size() == 3) { // If there are three cards selected
 				
 				boolean result = checkIfSet();
 				
@@ -140,7 +134,80 @@ public class PlayGameActivity extends Activity {
 	 */
 	private boolean checkIfSet() {
 		
-		return false;	//HACK FIXME
+		Card a = selected.get(0).myCard;
+		Card b = selected.get(1).myCard;
+		Card c = selected.get(2).myCard;
+		
+		boolean validNum = checkNum(a, b, c);
+		boolean validCol = checkColor(a, b, c);
+		boolean validShape = checkShape(a, b, c);
+		boolean validFill = checkFill(a, b, c);
+		
+		return (validNum && validCol && validShape && validFill); 
 	}
+	
+	private boolean checkNum(Card a, Card b, Card c) {
+		
+		// All same
+		if ((a.getNumber() == b.getNumber()) && (b.getNumber() == c.getNumber())) {
+			return true;
+		}
+		
+		// All different
+		else if ((a.getNumber() != b.getNumber()) && (a.getNumber() != b.getNumber())
+							&& (b.getNumber() != c.getNumber())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean checkColor(Card a, Card b, Card c) {
+			
+			// All same
+			if ((a.getColor() == b.getColor()) && (b.getColor() == c.getColor())) {
+				return true;
+			}
+			
+			// All different
+			else if ((a.getColor() != b.getColor()) && (a.getColor() != b.getColor())
+								&& (b.getColor() != c.getColor())) {
+				return true;
+			}
+			
+			return false;
+		}
+	
+	private boolean checkShape(Card a, Card b, Card c) {
+		
+		// All same
+		if ((a.getShape() == b.getShape()) && (b.getShape() == c.getShape())) {
+			return true;
+		}
+		
+		// All different
+		else if ((a.getShape() != b.getShape()) && (a.getShape() != b.getShape())
+							&& (b.getShape() != c.getShape())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean checkFill(Card a, Card b, Card c) {
+			
+			// All same
+			if ((a.getFill() == b.getFill()) && (b.getFill() == c.getFill())) {
+				return true;
+			}
+			
+			// All different
+			else if ((a.getFill() != b.getFill()) && (a.getFill() != b.getFill())
+								&& (b.getFill() != c.getFill())) {
+				return true;
+			}
+			
+			return false;
+		}
 
 }

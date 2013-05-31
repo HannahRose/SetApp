@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 public class CardButton extends ImageButton {
 	
 	/** The card that this button will represent. */
-	private Card myCard;
+	protected Card myCard;	// Make private if possible?? FIXME
 	
 	/** The Paint with which to draw the background of the card. */
 	private Paint background;
