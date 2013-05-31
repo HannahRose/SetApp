@@ -17,13 +17,13 @@ public class Card {
 		OPEN, LINED, SOLID
 	}
 	
-	private static int number;
+	private int number;
 	
-	private static Color color;
+	private Color color;
 	
-	private static Shape shape;
+	private Shape shape;
 	
-	private static Fill fill;
+	private Fill fill;
 		
 	/** Constructor for Card objects. */
 	public Card(int thisNum, Color thisColor, Shape thisShape, Fill thisFill) {

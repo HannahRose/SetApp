@@ -1,8 +1,9 @@
 package com.example.setapp;
 
+import com.example.setapp.Card.Color;
+
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -14,16 +15,19 @@ public class CardView extends View {
 
 	private boolean selected = false;	// Cards are not selected by default.
 		
-	private Paint foreground = new Paint();;
+	private Paint foreground = new Paint();
+	
+	private int GREEN = 0xff008000;
+	private int RED = 0xffdd0033;
+	private int PURPLE = 0xff900080;
 	
 
 	public CardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 			
-		setBackgroundColor(0xff0000ff);
+		setBackgroundColor(0xdddddddd);
 		
-		foreground.setColor(0xff00ff00);
-		foreground.setStrokeWidth(6f);	//FIXME scale
+		foreground.setStrokeWidth(8f);	//FIXME scale
 	}
 	
 	
@@ -55,9 +59,25 @@ public class CardView extends View {
 	public void onDraw(Canvas canvas) {
 				
 		int width = getWidth(); 
-		int height = getHeight(); 
+		int height = getHeight();
 		
+		if (myCard.getColor() == Color.RED) {
+			foreground.setColor(RED);
+		}
+		else if (myCard.getColor() == Color.GREEN) {
+			foreground.setColor(GREEN);
+		}
+		else {
+			foreground.setColor(PURPLE);
+		}
+		
+		System.out.println(myCard.toString());
+
 		canvas.drawLine(0, 0, width, height, foreground);
+		
+		if (selected) {
+			//do something cool
+		}
 		
 	}
 	
