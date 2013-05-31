@@ -16,11 +16,11 @@ public class PlayGameActivity extends Activity {
 	
 	private Deck deck;
 		
-	private Vector<CardButton> selected = new Vector<CardButton>();
+	private Vector<CardView> selected = new Vector<CardView>();
 	
 	//private numSets = 0;	// Zero sets found so far. 
 	
-	private Vector<CardButton> buttons = new Vector<CardButton>();
+	private Vector<CardView> buttons = new Vector<CardView>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class PlayGameActivity extends Activity {
 	/** Selects or unselects a card if the button is pressed. */
 	public void selectCard(View view) {
 		 
-		if (view instanceof CardButton) {
-			CardButton c = (CardButton) view;
+		if (view instanceof CardView) {
+			CardView c = (CardView) view;
 			
 			if (c.hasCard()) { //only select or unselect a button if it has a corresponding card
 				if (c.isSelected()) {
@@ -98,27 +98,26 @@ public class PlayGameActivity extends Activity {
 			}
 		}
 		else {
-			System.out.println("View was not a CardButton!");
+			System.out.println("View was not a CardView!");
 		}
 	}
 	
 	private void addAllButtons() {
 		
-		buttons.add((CardButton) findViewById(R.id.buttonA1));
-		buttons.add((CardButton) findViewById(R.id.buttonA2)); 
-		buttons.add((CardButton) findViewById(R.id.buttonA3)); 
-		buttons.add((CardButton) findViewById(R.id.buttonB1)); 
-		buttons.add((CardButton) findViewById(R.id.buttonB2)); 
-		buttons.add((CardButton) findViewById(R.id.buttonB3)); 
-		buttons.add((CardButton) findViewById(R.id.buttonC1)); 
-		buttons.add((CardButton) findViewById(R.id.buttonC2));
-		buttons.add((CardButton) findViewById(R.id.buttonC3));
+		buttons.add((CardView) findViewById(R.id.buttonA1));
+		buttons.add((CardView) findViewById(R.id.buttonA2)); 
+		buttons.add((CardView) findViewById(R.id.buttonA3)); 
+		buttons.add((CardView) findViewById(R.id.buttonB1)); 
+		buttons.add((CardView) findViewById(R.id.buttonB2)); 
+		buttons.add((CardView) findViewById(R.id.buttonB3)); 
+		buttons.add((CardView) findViewById(R.id.buttonC1)); 
+		buttons.add((CardView) findViewById(R.id.buttonC2));
+		buttons.add((CardView) findViewById(R.id.buttonC3));
 	}
 	
-	// Assumes that all elements in the Table Layout are CardButtons.
 	private void dealCards() {
 		
-		for (CardButton c : buttons) {
+		for (CardView c : buttons) {
 			
 			if (!c.hasCard()) {
 				c.setCard(deck.getTopCard());

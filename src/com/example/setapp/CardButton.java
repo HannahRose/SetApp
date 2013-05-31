@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 //import android.graphics.RectF;
@@ -26,12 +27,6 @@ public class CardButton extends ImageButton {
 	private Rect cardRect;
 	
 	private boolean selected = false;	// Cards are not selected by default.
-	
-	public CardButton(Context context) {
-		super(context);
-		
-		initialize();
-	}
 	
 	public CardButton(Context context, AttributeSet attrib) {
 		super(context, attrib);
@@ -59,6 +54,9 @@ public class CardButton extends ImageButton {
 	private void initialize() {
 		background = new Paint(-1); 	// Create the white background paint. 
 		cardRect = new Rect(0, getHeight(), 0, getWidth());
+		
+		Drawable D = getResources().getDrawable(R.drawable.two_ovals);
+		setImageDrawable(D);
 	}
 	
 	/** Sets the Card data member of a CardButton.
@@ -104,6 +102,7 @@ public class CardButton extends ImageButton {
 	// If the card is not selected, it should become selected. 
 	// Otherwise it should become unselected.
 	public void setSelected(boolean b) {
+		// Call super.setSelected(b);??
 		selected = b;
 	}
 
