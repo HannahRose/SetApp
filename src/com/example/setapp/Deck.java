@@ -1,7 +1,6 @@
 package com.example.setapp;
 
 import java.util.Stack;
-import java.util.Vector;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
@@ -18,7 +17,6 @@ public class Deck {
 	/** Creates a new deck of cards and shuffles them. */
 	public Deck() {
 		
-		Card c;
 		
 		// Create all the cards in the deck.
 		for (int num = 0; num < 3; num++) { // Yuck, icky nesting.
@@ -57,12 +55,7 @@ public class Deck {
 	 */
 	public Card getTopCard() {
 		
-		System.out.println("Cards in the deck: " + deck.size());
-		Card c = deck.pop();
-		System.out.println(c.toString());
-		return c;
-		
-//		return deck.pop();
+		return deck.pop();
 	}
 	
 	/** Gives the size of the deck. 

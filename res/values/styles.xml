@@ -19,8 +19,9 @@
     
     <style name="CardStyle" >
         <item name="android:layout_width"> 100dp </item>
-        <item name="android:layout_height"> 80dp </item>
+        <item name="android:layout_height"> 100dp </item>
         <item name="android:onClick"> selectCard </item>
+        <item name="android:padding" > 20dp </item>
 	</style>
 	
     <style name="TableStyle" >
