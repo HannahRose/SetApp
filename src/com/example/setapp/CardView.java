@@ -52,7 +52,7 @@ public class CardView extends View {
 		setBackgroundColor(0xdddddddd);
 
 		foreground.setStrokeWidth(10);	//FIXME scale
-		foreground.setStrokeJoin(Paint.Join.ROUND);
+//		foreground.setStrokeJoin(Paint.Join.ROUND);
 	}
 	
 	
@@ -106,13 +106,17 @@ public class CardView extends View {
 	}
 	
 	private void setCardDraw() {
+		
+		float width = (float) getWidth();
+		float height = (float) getHeight();
 				
-		float shapeWidth = ((float) getWidth())/6;
-		float shapeHeight = ((float) 3*getHeight())/4;
+		float shapeWidth = width/8;
+		float shapeHeight = 3*height/4;
 		
-		float wOffset = ((float) getWidth())/offsetRatio;
-		float hOffset = ((float) getHeight())/offsetRatio;
+		float xCenter = width/2;
+		float yCenter = height/2;
 		
+
 		// Set the color of the card.
 		if (myCard.getColor() == Color.RED) {
 			foreground.setColor(RED);
@@ -126,13 +130,13 @@ public class CardView extends View {
 		
 		// Set the shape on the card.
 		if (myCard.getShape() == Shape.DIAMOND) {
-			Diamond(shapeWidth, shapeHeight, wOffset, hOffset);
+			Diamond(shapeWidth, shapeHeight, xCenter, yCenter);
 		}
 		else if (myCard.getShape() == Shape.OVAL) {
-			Oval(shapeWidth, shapeHeight, wOffset, hOffset);
+			Oval(shapeWidth, shapeHeight, xCenter, yCenter);
 		}
 		else {
-			Squiggle(shapeWidth, shapeHeight, wOffset, hOffset);
+			Squiggle(shapeWidth, shapeHeight, xCenter, yCenter);
 		}
 		
 		// Set the fill type. 
@@ -147,12 +151,12 @@ public class CardView extends View {
 		}
 	}
 	
-	public void Diamond(float width, float height, float wOffset, float hOffset) {
+	public void Diamond(float width, float height, float xCenter, float yCenter) {
 			
 		final int diamondVert = 4; // Number of verticies of a diamond.
 		
-		float[] xpoints = {wOffset, (width-wOffset)/2, width-wOffset, (width-wOffset)/2};
-		float[] ypoints = {(height-hOffset)/2, hOffset, (height-hOffset)/2, height-hOffset};
+		float[] xpoints = {xCenter-width/2, xCenter, xCenter+width/2, xCenter};
+		float[] ypoints = {yCenter, yCenter-height/2, yCenter, yCenter+height/2};
 
 		cardDraw.moveTo(xpoints[0], ypoints[0]);
 		for (int p = 1; p < diamondVert; p++) {
