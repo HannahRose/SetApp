@@ -166,19 +166,22 @@ public class CardView extends View {
 		cardDraw.close();
 	}
 	
-	public void Oval(float width, float height, float wOffset, float hOffset) {
+	public void Oval(float width, float height, float xCenter, float yCenter) {
 		
-		RectF oval = new RectF(0, 0, 5*width/6, 5*height/6);
+		RectF oval = new RectF(xCenter-width/2, yCenter-height/2, xCenter+width/2, yCenter+height/2);
 		
 		cardDraw.addOval(oval, Path.Direction.CW);
 	}
 	
-	public void Squiggle(float width, float height, float wOffset, float hOffset) {
+	public void Squiggle(float width, float height, float xCenter, float yCenter) {
 		
-		cardDraw.moveTo(0, height/10);
-		cardDraw.quadTo(width/3, 0, 5*width/6, 2*height/5);
-		cardDraw.quadTo(width, 9*height/10, width/6, 3*height/5);
-		cardDraw.close();
+		cardDraw.moveTo(xCenter-width/2, yCenter-height/4);
+		cardDraw.quadTo(xCenter-width/4, yCenter-height/2, xCenter+width/4, yCenter-height/4);
+		cardDraw.cubicTo(xCenter+3*width/8, yCenter-height/8, xCenter+width/6, yCenter+height/8, xCenter+width/2, yCenter+height/4);
+		cardDraw.quadTo(xCenter+width/4, yCenter+height/2, xCenter-width/4, yCenter+height/4);
+		cardDraw.cubicTo(xCenter-3*width/8, yCenter+height/8, xCenter-width/6, yCenter+height/8, xCenter-width/2, yCenter-height/4);
+		
+		
 	}
 
 }
