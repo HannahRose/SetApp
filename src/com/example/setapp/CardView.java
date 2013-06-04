@@ -1,10 +1,13 @@
 package com.example.setapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -18,15 +21,13 @@ public class CardView extends View {
 	protected Card myCard;	// Make private if possible?? FIXME
 	
 	private Path cardDraw = new Path();
-	private RectF cardRect;
 
-	
 	private boolean selected = false;	// Cards are not selected by default.
 		
 	private Paint foreground = new Paint();
-	
+	private Paint fill = new Paint();
 	private Paint edges = new Paint();
-	
+		
 	private int GREEN = 0xff008000;
 	private int RED = 0xffdd0033;
 	private int PURPLE = 0xff900080;
@@ -55,11 +56,13 @@ public class CardView extends View {
 	private void initialize() {
 		
 		setBackgroundColor(WHITE);
-
 		foreground.setStrokeWidth(10);	//FIXME scale
-		edges.setStrokeWidth(2);	
+		foreground.setStyle(Paint.Style.STROKE);
+		fill.setStrokeWidth(8);
+		fill.setStyle(Paint.Style.FILL);
+		edges.setStrokeWidth(8);
+		edges.setStyle(Paint.Style.STROKE);
 		
-		cardRect = new RectF(0, 0, getWidth(), getHeight());
 	}
 	
 	
@@ -93,40 +96,30 @@ public class CardView extends View {
 		super.onDraw(canvas);
 		
 		System.out.println(myCard.toString());
-		
-		float width = (float) getWidth();
-		float height = (float) getHeight();
 				
-		float shapeWidth = width/8;
-		float shapeHeight = 9*height/16;
-		
-		float xCenter = width/2;
-		float xOffset = width/6;
+		float xCenter = ((float) getWidth())/2;
+		float xOffset = ((float) getWidth())/6;
 		
 		float[] xCenters2 = {xCenter-xOffset/2, xCenter+xOffset/2};
 		float[] xCenters3 = {xCenter-xOffset, xCenter+xOffset};
 		
-		float yCenter = height/2;
 		
 		// Deal with drawing different numbers of shapes.
 		if ((myCard.getNumber() % 2) == 1) {	// 1 or a 3
-			setCardDraw(shapeWidth, shapeHeight, xCenter, yCenter);
-			canvas.drawPath(cardDraw, foreground);
-			cardDraw.rewind();
+			setCardDraw(xCenter);
+			doDrawing(canvas);
 			
 			if (myCard.getNumber() == 3) {
 				for (int i = 0; i < 2; i++) {
-					setCardDraw(shapeWidth, shapeHeight, xCenters3[i], yCenter);
-					canvas.drawPath(cardDraw, foreground);
-					cardDraw.rewind();
+					setCardDraw(xCenters3[i]);
+					doDrawing(canvas);
 				}
 			}
 		}
 		else { // 2
 			for (int i = 0; i < 2; i++) {
-				setCardDraw(shapeWidth, shapeHeight, xCenters2[i], yCenter);
-				canvas.drawPath(cardDraw, foreground);
-				cardDraw.rewind();
+				setCardDraw(xCenters2[i]);
+				doDrawing(canvas);
 			}
 		}
 		
@@ -138,30 +131,51 @@ public class CardView extends View {
 			edges.setColor(GREY);
 		}
 		
-		edges.setColor(BLUE);
-		canvas.drawRoundRect(cardRect, width/6, height/6, edges);
+		RectF cardRect = new RectF(0, 0, (float) getWidth(), (float) getHeight());
 		canvas.drawRect(cardRect, edges);
+		
+	}
+	
+	private void doDrawing(Canvas canvas) {
+		canvas.drawPath(cardDraw, foreground);	//draw the shape
+		canvas.drawPath(cardDraw, fill);		//fill the shape (open, solid, or lined)
+		cardDraw.rewind();
 	}
 	
 	// Occurs when a button containing a card is clicked.
 	// If the card is not selected, it should become selected. 
 	// Otherwise it should become unselected.
 	public void setSelected(boolean b) {
-		// Call super.setSelected(b);?? FIXME
 		selected = b;
 	}
+
 	
-	private void setCardDraw(float shapeWidth, float shapeHeight, float xCenter, float yCenter) {
+	private void setCardDraw(float xCenter) {
+		
+		float width = (float) getWidth();
+		float height = (float) getHeight();
+				
+		float shapeWidth = width/8;
+		float shapeHeight = 9*height/16;
+		
+		float yCenter = height/2;
+		
+		BitmapShader myFill;
+		Bitmap fillBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+		Canvas fillCanvas = new Canvas(fillBitmap);
 		
 		// Set the color of the card.
 		if (myCard.getColor() == Color.RED) {
 			foreground.setColor(RED);
+			fill.setColor(RED);
 		}
 		else if (myCard.getColor() == Color.GREEN) {
 			foreground.setColor(GREEN);
+			fill.setColor(GREEN);
 		}
 		else {
 			foreground.setColor(PURPLE);
+			fill.setColor(PURPLE);
 		}
 		
 		// Set the shape on the card.
@@ -177,20 +191,23 @@ public class CardView extends View {
 		
 		// Set the fill type. 
 		if (myCard.getFill() == Fill.SOLID) {
-			foreground.setStyle(Paint.Style.FILL);
+			fillBitmap.eraseColor(fill.getColor());	// Fill the bitmap with the specified color	
 		}
-		else if (myCard.getFill() == Fill.OPEN) {
-			foreground.setStyle(Paint.Style.STROKE);
-		}
-		else {	// Lined
-			foreground.setStyle(Paint.Style.STROKE);
+		else if (myCard.getFill() == Fill.LINED) {
 			
-//			float offset = shapeHeight/8;
-//			float y = offset;
-//			while (y < shapeHeight) {
-//				cardDraw.moveTo(x, y)
-//			}
+			float y = shapeHeight/6; 
+			
+			while (y < shapeHeight) {
+				fillCanvas.drawLine(0, y, 2*shapeWidth, y, fill);
+				y += shapeHeight/6;
+			}			
 		}
+		
+		// Do nothing if the fill is open
+		
+		myFill = new BitmapShader(fillBitmap, Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+		fill.setShader(myFill);
+
 	}
 	
 	public void Diamond(float width, float height, float xCenter, float yCenter) {

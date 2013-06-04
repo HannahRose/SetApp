@@ -135,21 +135,20 @@ public class PlayGameActivity extends Activity {
 		boolean result = isSet();
 		System.out.println("Is set: " + result);
 		
-		if (result) {
-			//if a set, flash and redeal, update numsetsfound
-			for (CardView cv : selected) {
+		//if a set, flash and redeal, update numsetsfound
+		for (CardView cv : selected) {
+			
+			if (result) { 		//if a set, flash and redeal, update numsetsfound
 				cv.setCard(deck.getTopCard());
-				cv.invalidate();
 				//numSets++;
 			}
+			//else display "not a set!" message(?), unselect all
 
+			cv.setSelected(false);
+			cv.invalidate();
+			//numSets++;
 		}
-		//else display "not a set!" message(?), unselect all
-		else {
-			for (CardView cv : selected) {
-				cv.setSelected(false);
-			}
-		}
+
 		selected.removeAllElements();
 	}
 	
