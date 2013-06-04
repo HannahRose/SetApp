@@ -32,7 +32,6 @@ public class PlayGameActivity extends Activity {
 		deck = new Deck();
 		addAllButtons();
 		dealCards();
-		
 	}
 
 	/**
@@ -118,7 +117,9 @@ public class PlayGameActivity extends Activity {
 		for (CardView c : buttons) {
 			
 			if (!c.hasCard()) {
-				c.setCard(deck.getTopCard());
+				if (deck.size() > 0) {
+					c.setCard(deck.getTopCard());
+				}
 			}
 		}
 		

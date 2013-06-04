@@ -54,7 +54,7 @@ public class Deck {
 	 * @return The card that was on top of the deck.
 	 */
 	public Card getTopCard() {
-		
+
 		return deck.pop();
 	}
 	
