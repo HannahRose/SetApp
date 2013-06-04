@@ -91,7 +91,6 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		c.invalidate();
-		System.out.println("cards selected: " + selected.size());
 		
 		if (selected.size() == 3) { // If there are three cards selected
 			checkIfSet();
@@ -133,7 +132,6 @@ public class PlayGameActivity extends Activity {
 	private void checkIfSet() {
 		
 		boolean result = isSet();
-		System.out.println("Is set: " + result);
 		
 		//if a set, flash and redeal, update numsetsfound
 		for (CardView cv : selected) {
