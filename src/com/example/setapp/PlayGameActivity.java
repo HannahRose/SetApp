@@ -71,34 +71,30 @@ public class PlayGameActivity extends Activity {
 	
 	/** Selects or unselects a card if the button is pressed. */
 	public void selectCard(View view) {
-		 
-		if (view instanceof CardView) {
-			CardView c = (CardView) view;
-			
-			if (c.hasCard()) { //only select or unselect a button if it has a corresponding card
-				if (c.isSelected()) {
-					c.setSelected(false);
-					selected.remove(c);
-				}
-				else {
-					c.setSelected(true);
-					selected.add(c);
-				}
+				 
+		CardView c = (CardView) view;
+		
+		if (c.hasCard()) { //only select or unselect a button if it has a corresponding card
+			if (c.isSelected()) {
+				c.setSelected(false);
+				selected.remove(c);
 			}
-			
-			if (selected.size() == 3) { // If there are three cards selected
-				
-				boolean result = checkIfSet();
-				
-				if (result) {
-					//if a set, flash and redeal, update numsetsfound
-
-				}
-				//else display "not a set!" message, unselect all 
+			else {
+				c.setSelected(true);
+				selected.add(c);
 			}
 		}
 		else {
-			System.out.println("View was not a CardView!");
+			c.setSelected(false);
+			selected.remove(c); 
+			System.out.println("Button without card was selected.");
+		}
+		
+		c.invalidate();
+		System.out.println("cards selected: " + selected.size());
+		
+		if (selected.size() == 3) { // If there are three cards selected
+			checkIfSet();
 		}
 	}
 	
@@ -107,12 +103,15 @@ public class PlayGameActivity extends Activity {
 		buttons.add((CardView) findViewById(R.id.buttonA1));
 		buttons.add((CardView) findViewById(R.id.buttonA2)); 
 		buttons.add((CardView) findViewById(R.id.buttonA3)); 
+		buttons.add((CardView) findViewById(R.id.buttonA4)); 
 		buttons.add((CardView) findViewById(R.id.buttonB1)); 
 		buttons.add((CardView) findViewById(R.id.buttonB2)); 
-		buttons.add((CardView) findViewById(R.id.buttonB3)); 
+		buttons.add((CardView) findViewById(R.id.buttonB3));
+		buttons.add((CardView) findViewById(R.id.buttonB4)); 
 		buttons.add((CardView) findViewById(R.id.buttonC1)); 
 		buttons.add((CardView) findViewById(R.id.buttonC2));
 		buttons.add((CardView) findViewById(R.id.buttonC3));
+		buttons.add((CardView) findViewById(R.id.buttonC4)); 
 	}
 	
 	private void dealCards() {
@@ -131,7 +130,30 @@ public class PlayGameActivity extends Activity {
 	 * 
 	 * @return True if the three selected cards are a set, otherwise false. 
 	 */
-	private boolean checkIfSet() {
+	private void checkIfSet() {
+		
+		boolean result = isSet();
+		System.out.println("Is set: " + result);
+		
+		if (result) {
+			//if a set, flash and redeal, update numsetsfound
+			for (CardView cv : selected) {
+				cv.setCard(deck.getTopCard());
+				cv.invalidate();
+				//numSets++;
+			}
+
+		}
+		//else display "not a set!" message(?), unselect all
+		else {
+			for (CardView cv : selected) {
+				cv.setSelected(false);
+			}
+		}
+		selected.removeAllElements();
+	}
+	
+	private boolean isSet() {
 		
 		Card a = selected.get(0).myCard;
 		Card b = selected.get(1).myCard;
@@ -153,7 +175,7 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		// All different
-		else if ((a.getNumber() != b.getNumber()) && (a.getNumber() != b.getNumber())
+		else if ((a.getNumber() != b.getNumber()) && (a.getNumber() != c.getNumber())
 							&& (b.getNumber() != c.getNumber())) {
 			return true;
 		}
@@ -169,7 +191,7 @@ public class PlayGameActivity extends Activity {
 			}
 			
 			// All different
-			else if ((a.getColor() != b.getColor()) && (a.getColor() != b.getColor())
+			else if ((a.getColor() != b.getColor()) && (a.getColor() != c.getColor())
 								&& (b.getColor() != c.getColor())) {
 				return true;
 			}
@@ -185,7 +207,7 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		// All different
-		else if ((a.getShape() != b.getShape()) && (a.getShape() != b.getShape())
+		else if ((a.getShape() != b.getShape()) && (a.getShape() != c.getShape())
 							&& (b.getShape() != c.getShape())) {
 			return true;
 		}
@@ -201,7 +223,7 @@ public class PlayGameActivity extends Activity {
 			}
 			
 			// All different
-			else if ((a.getFill() != b.getFill()) && (a.getFill() != b.getFill())
+			else if ((a.getFill() != b.getFill()) && (a.getFill() != c.getFill())
 								&& (b.getFill() != c.getFill())) {
 				return true;
 			}

@@ -65,4 +65,10 @@ public class Card {
 	}
 	
 	//////////////////////////////////////
+	
+	public boolean equals(Card rhs) {
+		
+		return (this.getNumber() == rhs.getNumber()) && (this.getColor() == rhs.getColor()) 
+			&& (this.getShape() == rhs.getShape()) && (this.getFill() == rhs.getFill());
+	}
 }

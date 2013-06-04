@@ -18,16 +18,21 @@ public class CardView extends View {
 	protected Card myCard;	// Make private if possible?? FIXME
 	
 	private Path cardDraw = new Path();
-	
-	private final int offsetRatio = 10;
+	private RectF cardRect;
 
+	
 	private boolean selected = false;	// Cards are not selected by default.
 		
 	private Paint foreground = new Paint();
 	
+	private Paint edges = new Paint();
+	
 	private int GREEN = 0xff008000;
 	private int RED = 0xffdd0033;
 	private int PURPLE = 0xff900080;
+	private int WHITE = 0xffffffff;
+	private int GREY = 0xdddddddd;
+	private int BLUE = 0xdd00bfff;
 	
 	public CardView(Context context) {
 		super(context);
@@ -49,10 +54,12 @@ public class CardView extends View {
 	
 	private void initialize() {
 		
-		setBackgroundColor(0xdddddddd);
+		setBackgroundColor(WHITE);
 
 		foreground.setStrokeWidth(10);	//FIXME scale
-//		foreground.setStrokeJoin(Paint.Join.ROUND);
+		edges.setStrokeWidth(2);	
+		
+		cardRect = new RectF(0, 0, getWidth(), getHeight());
 	}
 	
 	
@@ -86,37 +93,66 @@ public class CardView extends View {
 		super.onDraw(canvas);
 		
 		System.out.println(myCard.toString());
-
-		setCardDraw();
-		canvas.drawPath(cardDraw, foreground);
-		//canvas.drawLine(0, 0, (float) getWidth(), (float) getHeight(), foreground);
 		
-		if (selected) {
-			//do something cool
+		float width = (float) getWidth();
+		float height = (float) getHeight();
+				
+		float shapeWidth = width/8;
+		float shapeHeight = 9*height/16;
+		
+		float xCenter = width/2;
+		float xOffset = width/6;
+		
+		float[] xCenters2 = {xCenter-xOffset/2, xCenter+xOffset/2};
+		float[] xCenters3 = {xCenter-xOffset, xCenter+xOffset};
+		
+		float yCenter = height/2;
+		
+		// Deal with drawing different numbers of shapes.
+		if ((myCard.getNumber() % 2) == 1) {	// 1 or a 3
+			setCardDraw(shapeWidth, shapeHeight, xCenter, yCenter);
+			canvas.drawPath(cardDraw, foreground);
+			cardDraw.rewind();
+			
+			if (myCard.getNumber() == 3) {
+				for (int i = 0; i < 2; i++) {
+					setCardDraw(shapeWidth, shapeHeight, xCenters3[i], yCenter);
+					canvas.drawPath(cardDraw, foreground);
+					cardDraw.rewind();
+				}
+			}
+		}
+		else { // 2
+			for (int i = 0; i < 2; i++) {
+				setCardDraw(shapeWidth, shapeHeight, xCenters2[i], yCenter);
+				canvas.drawPath(cardDraw, foreground);
+				cardDraw.rewind();
+			}
 		}
 		
+		
+		if (selected) {
+			edges.setColor(BLUE);
+		}
+		else {
+			edges.setColor(GREY);
+		}
+		
+		edges.setColor(BLUE);
+		canvas.drawRoundRect(cardRect, width/6, height/6, edges);
+		canvas.drawRect(cardRect, edges);
 	}
 	
 	// Occurs when a button containing a card is clicked.
 	// If the card is not selected, it should become selected. 
 	// Otherwise it should become unselected.
 	public void setSelected(boolean b) {
-		// Call super.setSelected(b);??
+		// Call super.setSelected(b);?? FIXME
 		selected = b;
 	}
 	
-	private void setCardDraw() {
+	private void setCardDraw(float shapeWidth, float shapeHeight, float xCenter, float yCenter) {
 		
-		float width = (float) getWidth();
-		float height = (float) getHeight();
-				
-		float shapeWidth = width/8;
-		float shapeHeight = 3*height/4;
-		
-		float xCenter = width/2;
-		float yCenter = height/2;
-		
-
 		// Set the color of the card.
 		if (myCard.getColor() == Color.RED) {
 			foreground.setColor(RED);
@@ -146,8 +182,14 @@ public class CardView extends View {
 		else if (myCard.getFill() == Fill.OPEN) {
 			foreground.setStyle(Paint.Style.STROKE);
 		}
-		else {
-			foreground.setStyle(Paint.Style.FILL_AND_STROKE);
+		else {	// Lined
+			foreground.setStyle(Paint.Style.STROKE);
+			
+//			float offset = shapeHeight/8;
+//			float y = offset;
+//			while (y < shapeHeight) {
+//				cardDraw.moveTo(x, y)
+//			}
 		}
 	}
 	
@@ -164,6 +206,7 @@ public class CardView extends View {
 		}
 		
 		cardDraw.close();
+		foreground.setStrokeJoin(Paint.Join.MITER);
 	}
 	
 	public void Oval(float width, float height, float xCenter, float yCenter) {
@@ -180,8 +223,9 @@ public class CardView extends View {
 		cardDraw.cubicTo(xCenter+3*width/8, yCenter-height/8, xCenter+width/6, yCenter+height/8, xCenter+width/2, yCenter+height/4);
 		cardDraw.quadTo(xCenter+width/4, yCenter+height/2, xCenter-width/4, yCenter+height/4);
 		cardDraw.cubicTo(xCenter-3*width/8, yCenter+height/8, xCenter-width/6, yCenter+height/8, xCenter-width/2, yCenter-height/4);
+		cardDraw.close();
 		
-		
+		foreground.setStrokeJoin(Paint.Join.ROUND);
 	}
 
 }

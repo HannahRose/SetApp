@@ -66,4 +66,22 @@
     	
     </TableRow>
     
+      <TableRow
+        android:id="@+id/tableRow4"
+        style="@style/TableStyle" >
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonA4"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonB4"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonC4"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    </TableRow>
+    
 </TableLayout>
