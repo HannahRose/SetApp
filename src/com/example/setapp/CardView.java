@@ -67,6 +67,7 @@ public class CardView extends View {
 		fill.setStrokeWidth(8);
 		fill.setStyle(Paint.Style.FILL);
 		edges.setStrokeWidth(8);
+		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
 		
 	}
@@ -80,47 +81,23 @@ public class CardView extends View {
 		
 		myCard = newCard;
 		
-		float width = (float) getWidth();
-		float height = (float) getHeight();
-				
-		float shapeWidth = width/8;
-		float shapeHeight = 9*height/16;
-		
 		fillBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
 		fillCanvas = new Canvas(fillBitmap);
 		
 		// Set the color of the card.
 		if (myCard.getColor() == Color.RED) {
 			foreground.setColor(RED);
-			fill.setColor(RED);
 		}
 		else if (myCard.getColor() == Color.GREEN) {
 			foreground.setColor(GREEN);
-			fill.setColor(GREEN);
 		}
 		else {
 			foreground.setColor(PURPLE);
-			fill.setColor(PURPLE);
 		}
 		
-		// Set the fill type. 
-		if (myCard.getFill() == Fill.SOLID) {
-			fillBitmap.eraseColor(fill.getColor());	// Fill the bitmap with the specified color	
-		}
-		else if (myCard.getFill() == Fill.LINED) {
-			
-			float y = shapeHeight/6; 
-			
-			while (y < shapeHeight) {
-				fillCanvas.drawLine(0, y, 2*shapeWidth, y, fill);
-				y += shapeHeight/6;
-			}			
-		}
-		
-		// Do nothing if the fill is open
-		
-		myFill = new BitmapShader(fillBitmap, Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-		fill.setShader(myFill);
+		// The fill color should always be the same as the foreground.
+		fill.setColor(foreground.getColor());	
+
 	}
 	
 	/** Checks if the card data member is currently set. 
@@ -154,34 +131,26 @@ public class CardView extends View {
 		
 		// Deal with drawing different numbers of shapes.
 		if ((myCard.getNumber() % 2) == 1) {	// 1 or a 3
-			setShape(xCenter);
+			setShapeAndFill(xCenter);
 			doDrawing(canvas);
 			
 			if (myCard.getNumber() == 3) {
 				for (int i = 0; i < 2; i++) {
-					setShape(xCenters3[i]);
+					setShapeAndFill(xCenters3[i]);
 					doDrawing(canvas);
 				}
 			}
 		}
 		else { // 2
 			for (int i = 0; i < 2; i++) {
-				setShape(xCenters2[i]);
+				setShapeAndFill(xCenters2[i]);
 				doDrawing(canvas);
 			}
-		}
-		
-		if (selected) {
-			edges.setColor(BLUE);
-		}
-		else {
-			edges.setColor(GREY);
 		}
 		
 		cardRect.right = (float) getWidth();
 		cardRect.bottom = (float) getHeight();
 		canvas.drawRect(cardRect, edges);
-		
 	}
 	
 	private void doDrawing(Canvas canvas) {
@@ -196,11 +165,18 @@ public class CardView extends View {
 	public void setSelected(boolean b) {
 		selected = b;
 		
+		if (selected) {
+			edges.setColor(BLUE);
+		}
+		else {
+			edges.setColor(GREY);
+		}
+		
 		System.out.println(myCard.toString());
 	}
 
 	
-	private void setShape(float xCenter) {
+	private void setShapeAndFill(float xCenter) {
 		
 		float width = (float) getWidth();
 		float height = (float) getHeight();
@@ -220,7 +196,25 @@ public class CardView extends View {
 		else {
 			Squiggle(shapeWidth, shapeHeight, xCenter, yCenter);
 		}
-
+		
+		// Set the fill type. 
+		if (myCard.getFill() == Fill.SOLID) {
+			fillBitmap.eraseColor(fill.getColor());	// Fill the bitmap with the specified color	
+		}
+		else if (myCard.getFill() == Fill.LINED) {
+			
+			float y = shapeHeight/6; 
+			
+			while (y < shapeHeight) {
+				fillCanvas.drawLine(0, y, 2*shapeWidth, y, foreground);
+				y += shapeHeight/6;
+			}			
+		}
+		
+		// Do nothing if the fill is open
+		
+		myFill = new BitmapShader(fillBitmap, Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+		fill.setShader(myFill);
 	}
 	
 	public void Diamond(float width, float height, float xCenter, float yCenter) {
