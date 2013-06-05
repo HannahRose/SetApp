@@ -17,6 +17,16 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
+    <style name="GameButtonStyle" >
+        <item name="android:layout_centerInParent"> true </item>
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height" > wrap_content </item>
+        <item name="android:textSize"> 40sp </item>
+        <item name="android:typeface"> serif </item>
+        <item name="android:textStyle"> italic </item>
+        <item name="android:onClick"> playGame </item>
+    </style>
+    
     <style name="CardStyle" >
         <item name="android:layout_width"> 80dp </item>
         <item name="android:layout_height"> 120dp </item>
@@ -40,6 +50,6 @@
     	<item name="android:onClick" > setCardNum </item>
     </style>
 
-      			
+      		
 
 </resources>

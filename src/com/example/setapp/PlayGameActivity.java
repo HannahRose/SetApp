@@ -72,6 +72,12 @@ public class PlayGameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	public void onPause() {
+		super.onPause();
+		//SAVE
+	}
+	
 	/** Selects or unselects a card if the button is pressed. */
 	public void selectCard(View view) {
 				 
@@ -148,12 +154,13 @@ public class PlayGameActivity extends Activity {
 		//if a set, flash and redeal, update numsetsfound
 		for (CardView cv : selected) {
 			
-			if (result) { 		//if a set, flash and redeal, update numsetsfound
+			if (result) { 	//if a set, flash and redeal, update numsetsfound
 				cv.setCard(deck.getTopCard());
 				//numSets++;
 			}
-			//else display "not a set!" message(?), unselect all
+			//else display "not a set!" message(?)
 
+			// Unselect and invalidate all the selected cards so they will be redrawn.
 			cv.setSelected(false);
 			cv.invalidate();
 		}
@@ -163,9 +170,9 @@ public class PlayGameActivity extends Activity {
 	
 	private boolean isSet() {
 		
-		Card a = selected.get(0).myCard;
-		Card b = selected.get(1).myCard;
-		Card c = selected.get(2).myCard;
+		Card a = selected.get(0).getCard();
+		Card b = selected.get(1).getCard();
+		Card c = selected.get(2).getCard();
 		
 		boolean validNum = checkNum(a, b, c);
 		boolean validCol = checkColor(a, b, c);

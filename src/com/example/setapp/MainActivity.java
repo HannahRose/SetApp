@@ -2,6 +2,7 @@ package com.example.setapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +23,37 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	
+    	//Try to make a cool background FIXME
+//    	Deck deck = new Deck();
+//    	Bitmap bkgdBitmap;
+//    	CardView cv = new CardView(getBaseContext());
+//    	for (int i = 0; i < deck.size(); i++) {
+//    		cv.setCard(deck.getTopCard());
+//    		bkgdBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+//    	}
+    	
+    	setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	//SAVE!
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	
+    	System.out.println("In progress: " + gameInProgress);
+    	
     	// Change the text on the main button depending on whether
     	// or not a game is in progress already.
     	if (gameInProgress) {
@@ -33,13 +65,7 @@ public class MainActivity extends Activity {
     	}
     	
     	setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
     
     /** Switch to a new activity to start a game. 

@@ -10,28 +10,24 @@
 
     
     <Button android:id="@+id/newgamebutton"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/GameButtonStyle"
         android:text="@string/play_button"  
-        android:onClick="playGame" 
         android:visibility="visible" >
     </Button>
     
     <Button android:id="@+id/resumebutton"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/GameButtonStyle"
         android:text="@string/resume_button"  
-        android:onClick="playGame" 
         android:visibility="gone" >
     </Button> 
     
     <Button android:id="@+id/optionsButton"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/newgamebutton"
+        android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="30sp"
         android:text="@string/options_button"  
         android:onClick="options" >
     </Button>

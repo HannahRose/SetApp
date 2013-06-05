@@ -1,6 +1,5 @@
 package com.example.setapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -19,7 +18,7 @@ import com.example.setapp.Card.Shape;
 public class CardView extends View {
 	
 	/** The card that this button will represent. */
-	protected Card myCard;	// Make private if possible?? FIXME
+	private Card myCard;
 	
 	private Path cardDraw = new Path();
 	private RectF cardRect = new RectF();
@@ -111,6 +110,13 @@ public class CardView extends View {
 	 */
 	public boolean hasCard() {
 		return (myCard != null);
+	}
+	
+	/** Returns a copy of the current card. 
+	 * @return The current card, or null if no card is set. 
+	 */
+	public Card getCard() {
+		return myCard;
 	}
 	
 	/** Returns information about whether or not the button is selected.
