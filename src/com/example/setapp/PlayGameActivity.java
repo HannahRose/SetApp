@@ -72,10 +72,11 @@ public class PlayGameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	
 	@Override
-	public void onPause() {
-		super.onPause();
-		//SAVE
+	public void onSaveInstanceState(Bundle state) {
+		super.onSaveInstanceState(state);
+
 	}
 	
 	/** Selects or unselects a card if the button is pressed. */

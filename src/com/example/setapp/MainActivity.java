@@ -42,16 +42,18 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    @Override
-    public void onPause() {
-    	super.onPause();
-    	//SAVE!
-    }
-    
-    @Override
-    public void onResume() {
-    	super.onResume();
-    	
+	@Override
+	public void onSaveInstanceState(Bundle state) {
+		super.onSaveInstanceState(state);
+		state.putBoolean("gameInProgress", true);
+
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedState) {
+		
+		gameInProgress = savedState.getBoolean("gameInProgress");
+		
     	System.out.println("In progress: " + gameInProgress);
     	
     	// Change the text on the main button depending on whether
@@ -64,9 +66,8 @@ public class MainActivity extends Activity {
     		resume.setVisibility(VISIBLE);
     	}
     	
-    	setContentView(R.layout.activity_main);
-
-    }
+    	super.onRestoreInstanceState(savedState);	
+	}
     
     /** Switch to a new activity to start a game. 
      * 
