@@ -1,7 +1,6 @@
-
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tableLayout"
+    android:id="@+id/playGame"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center_vertical"
@@ -31,7 +30,7 @@
     	
     </TableRow>
     
-    <TableRow
+   <TableRow
         android:id="@+id/tableRow2"
         style="@style/TableStyle" >
     	
@@ -46,7 +45,7 @@
     	<com.example.setapp.CardView android:id="@+id/buttonC2"
         	style="@style/CardStyle" >
     	</com.example.setapp.CardView>
-    	
+    
     </TableRow>
     
     <TableRow
@@ -84,4 +83,23 @@
     	
     </TableRow>
     
+    <TableRow
+        android:id="@+id/tableRow5"
+        style="@style/TableStyle" 
+        android:visibility="gone" >
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonA5"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonB5"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    	<com.example.setapp.CardView android:id="@+id/buttonC5"
+        	style="@style/CardStyle" >
+    	</com.example.setapp.CardView>
+    	
+    </TableRow> 
+                  
 </TableLayout>

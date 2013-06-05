@@ -12,8 +12,8 @@ public class MainActivity extends Activity {
 	/** Flag indicating whether or not there is already a game in progress. */
 	private boolean gameInProgress = false;
 	
-	/** The integer value to indicate an invisible button. */
-	private final int INVISIBLE = 4;
+	/** The integer value to indicate a hidden button. */
+	private final int GONE = 8;
 	
 	/** The integer value to indicate a visible button. */
 	private final int VISIBLE = 0;
@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     		Button play = (Button) findViewById(R.id.newgamebutton);
     		Button resume = (Button) findViewById(R.id.resumebutton);
     		
-    		play.setVisibility(INVISIBLE);
+    		play.setVisibility(GONE);
     		resume.setVisibility(VISIBLE);
     	}
     	
@@ -49,6 +49,11 @@ public class MainActivity extends Activity {
     public void playGame(View view) {
     	Intent intent = new Intent(this, PlayGameActivity.class);
     	gameInProgress = true;
+    	startActivity(intent);
+    }
+    
+    public void options(View view) {
+    	Intent intent = new Intent(this, OptionsActivity.class);
     	startActivity(intent);
     }
     

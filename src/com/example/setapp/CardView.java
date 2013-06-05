@@ -40,6 +40,7 @@ public class CardView extends View {
 	private int WHITE = 0xffffffff;
 	private int GREY = 0xdddddddd;
 	private int BLUE = 0xdd00bfff;
+	private int TRANSPARENT = 0x0000000;
 	
 	public CardView(Context context) {
 		super(context);
@@ -84,6 +85,10 @@ public class CardView extends View {
 		fillBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
 		fillCanvas = new Canvas(fillBitmap);
 		
+		if (myCard == null) {	// We've run out of cards
+			return;
+		}
+		
 		// Set the color of the card.
 		if (myCard.getColor() == Color.RED) {
 			foreground.setColor(RED);
@@ -116,7 +121,6 @@ public class CardView extends View {
 		return selected;
 	}
 	
-	@SuppressLint("DrawAllocation")
 	@Override
 	public void onDraw(Canvas canvas) {
 		
@@ -128,6 +132,14 @@ public class CardView extends View {
 		float[] xCenters2 = {xCenter-xOffset/2, xCenter+xOffset/2};
 		float[] xCenters3 = {xCenter-xOffset, xCenter+xOffset};
 		
+		cardRect.right = (float) getWidth();
+		cardRect.bottom = (float) getHeight();
+		
+		if (myCard == null) { // No more cards in the deck.
+			foreground.setColor(TRANSPARENT);
+			canvas.drawRect(cardRect, foreground);
+			return;
+		}
 		
 		// Deal with drawing different numbers of shapes.
 		if ((myCard.getNumber() % 2) == 1) {	// 1 or a 3
@@ -148,8 +160,6 @@ public class CardView extends View {
 			}
 		}
 		
-		cardRect.right = (float) getWidth();
-		cardRect.bottom = (float) getHeight();
 		canvas.drawRect(cardRect, edges);
 	}
 	
@@ -171,8 +181,6 @@ public class CardView extends View {
 		else {
 			edges.setColor(GREY);
 		}
-		
-		System.out.println(myCard.toString());
 	}
 
 	

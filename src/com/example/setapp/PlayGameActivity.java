@@ -10,6 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TableRow;
 
 
 public class PlayGameActivity extends Activity {
@@ -18,7 +19,9 @@ public class PlayGameActivity extends Activity {
 		
 	private Vector<CardView> selected = new Vector<CardView>();
 	
-	//private numSets = 0;	// Zero sets found so far. 
+	//private numSets = 0;	// Zero sets found so far.
+	private int VISIBLE = 0;
+//	private int GONE = 8;
 	
 	private Vector<CardView> buttons = new Vector<CardView>();
 
@@ -31,6 +34,7 @@ public class PlayGameActivity extends Activity {
 		
 		deck = new Deck();
 		addAllButtons();
+		addCards();
 		dealCards();
 	}
 
@@ -109,21 +113,28 @@ public class PlayGameActivity extends Activity {
 		buttons.add((CardView) findViewById(R.id.buttonC1)); 
 		buttons.add((CardView) findViewById(R.id.buttonC2));
 		buttons.add((CardView) findViewById(R.id.buttonC3));
-		buttons.add((CardView) findViewById(R.id.buttonC4)); 
+		buttons.add((CardView) findViewById(R.id.buttonC4));
 	}
 	
 	private void dealCards() {
 		
 		for (CardView c : buttons) {
-			
 			if (!c.hasCard()) {
-				if (deck.size() > 0) {
 					c.setCard(deck.getTopCard());
-				}
 			}
 		}
+	}
+	
+	/** Increases the number of cards by three.*/
+	private void addCards() {
+
+		TableRow T = (TableRow) findViewById(R.id.tableRow5);
+		T.setVisibility(VISIBLE);
+		buttons.add((CardView) findViewById(R.id.buttonA5));
+		buttons.add((CardView) findViewById(R.id.buttonB5));
+		buttons.add((CardView) findViewById(R.id.buttonC5));
 		
-		// Does it automatically draw all cards??
+		dealCards();	 	// add cards to the new buttons
 	}
 	
 	/** Checks if the selected cards form a valid set. 
@@ -145,7 +156,6 @@ public class PlayGameActivity extends Activity {
 
 			cv.setSelected(false);
 			cv.invalidate();
-			//numSets++;
 		}
 
 		selected.removeAllElements();
