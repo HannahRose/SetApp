@@ -43,10 +43,11 @@
     </style>
     
     <style name="ToggleStyle" >
-        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_width"> 80dp </item>
         <item name="android:layout_height"> wrap_content </item>
         <item name="android:layout_weight"> 1 </item>
     	<item name="android:layout_margin"> 10dp </item>
+    	<item name="android:layout_centerVertical" > true </item>
     	<item name="android:onClick" > setCardNum </item>
     </style>
 

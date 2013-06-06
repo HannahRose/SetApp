@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onSaveInstanceState(Bundle state) {
 		super.onSaveInstanceState(state);
-		state.putBoolean("gameInProgress", true);
+		state.putBoolean("gameInProgress", gameInProgress);
 
 	}
 	

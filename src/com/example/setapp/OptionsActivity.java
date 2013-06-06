@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ToggleButton;
 
 public class OptionsActivity extends Activity {
+	
+	public static int numCards = 12;	// Default value for the number of cards to display.
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,30 @@ public class OptionsActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void setCardNum() {
-		System.out.println("SetCardNum");
+	public void setCardNum(View view) {
+		
+		if (view instanceof ToggleButton) {
+			ToggleButton t = (ToggleButton) view;
+			String num = (String) t.getText();
+			numCards = Integer.parseInt(num);
+			
+			// Ensures that the only checked button is the one corresponding
+			// to the current number of cards (the last button clicked).
+			//FIXME Make this more elegant.
+			ToggleButton a = (ToggleButton) findViewById(R.id.nineCards);
+			ToggleButton b = (ToggleButton) findViewById(R.id.twelveCards);
+			ToggleButton c = (ToggleButton) findViewById(R.id.fifteenCards);
+			
+			a.setChecked(false);
+			b.setChecked(false);
+			c.setChecked(false);
+			
+			t.setChecked(true);
+
+		}
+		
+		 
+		
 	}
 
 }

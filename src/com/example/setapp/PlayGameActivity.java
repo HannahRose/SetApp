@@ -10,6 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 
 
@@ -20,10 +21,11 @@ public class PlayGameActivity extends Activity {
 	private Vector<CardView> selected = new Vector<CardView>();
 	
 	//private numSets = 0;	// Zero sets found so far.
-	private int VISIBLE = 0;
-//	private int GONE = 8;
 	
 	private Vector<CardView> buttons = new Vector<CardView>();
+	
+	private int VISIBLE = 0;
+	private int GONE = 8;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,25 @@ public class PlayGameActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();	
 		
+		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
+		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
+		
+		int numCards = OptionsActivity.numCards;
+		
+		if (numCards < 15) {
+			rowFive.setVisibility(GONE);
+			
+			if (numCards < 12) {
+				rowFour.setVisibility(GONE);
+			}
+		}
+		else {
+			rowFour.setVisibility(VISIBLE);
+			rowFive.setVisibility(VISIBLE);
+		}
+		
 		deck = new Deck();
 		addAllButtons();
-		addCards();
 		dealCards();
 	}
 
@@ -107,20 +125,21 @@ public class PlayGameActivity extends Activity {
 		}
 	}
 	
+	/** Adds all buttons that are currently visible to the relevant vector. */
 	private void addAllButtons() {
 		
-		buttons.add((CardView) findViewById(R.id.buttonA1));
-		buttons.add((CardView) findViewById(R.id.buttonA2)); 
-		buttons.add((CardView) findViewById(R.id.buttonA3)); 
-		buttons.add((CardView) findViewById(R.id.buttonA4)); 
-		buttons.add((CardView) findViewById(R.id.buttonB1)); 
-		buttons.add((CardView) findViewById(R.id.buttonB2)); 
-		buttons.add((CardView) findViewById(R.id.buttonB3));
-		buttons.add((CardView) findViewById(R.id.buttonB4)); 
-		buttons.add((CardView) findViewById(R.id.buttonC1)); 
-		buttons.add((CardView) findViewById(R.id.buttonC2));
-		buttons.add((CardView) findViewById(R.id.buttonC3));
-		buttons.add((CardView) findViewById(R.id.buttonC4));
+		TableLayout layout = (TableLayout) findViewById(R.id.layout);
+		
+		for (int row = 0; row < layout.getChildCount(); row++) {
+			TableRow T = (TableRow) layout.getChildAt(row);
+			
+			if (T.getVisibility() == VISIBLE) {
+				for (int button = 0; button < T.getChildCount(); button++) {
+					CardView c = (CardView) T.getChildAt(button);
+					buttons.add(c);
+				}
+			}
+		}
 	}
 	
 	private void dealCards() {
@@ -130,18 +149,6 @@ public class PlayGameActivity extends Activity {
 					c.setCard(deck.getTopCard());
 			}
 		}
-	}
-	
-	/** Increases the number of cards by three.*/
-	private void addCards() {
-
-		TableRow T = (TableRow) findViewById(R.id.tableRow5);
-		T.setVisibility(VISIBLE);
-		buttons.add((CardView) findViewById(R.id.buttonA5));
-		buttons.add((CardView) findViewById(R.id.buttonB5));
-		buttons.add((CardView) findViewById(R.id.buttonC5));
-		
-		dealCards();	 	// add cards to the new buttons
 	}
 	
 	/** Checks if the selected cards form a valid set. 

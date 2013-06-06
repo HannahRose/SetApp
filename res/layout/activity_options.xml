@@ -13,21 +13,33 @@
          android:id="@+id/twelveCards"
          android:layout_centerInParent="true"
 		 style="@style/ToggleStyle"
-         android:text="@string/twelveCards" >
+         android:textOff="@string/twelveCards"
+         android:textOn="@string/twelveCards" >
      </ToggleButton>
      
      <ToggleButton
          android:id="@+id/nineCards"
          android:layout_toLeftOf="@id/twelveCards"
 		 style="@style/ToggleStyle"
-         android:text="@string/nineCards" >
+         android:textOff="@string/nineCards"
+         android:textOn="@string/nineCards" >
      </ToggleButton>
      
      <ToggleButton
          android:id="@+id/fifteenCards"
          android:layout_toRightOf="@id/twelveCards"
 		 style="@style/ToggleStyle"
-         android:text="@string/fifteenCards" >
+         android:textOff="@string/fifteenCards"
+         android:textOn="@string/fifteenCards"  >
      </ToggleButton>
+     
+     <TextView
+         android:id="@+id/cardNumLabel"
+         android:layout_toLeftOf="@id/nineCards"
+         android:layout_centerVertical="true"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/numCards" >
+     </TextView>
         
 </RelativeLayout>

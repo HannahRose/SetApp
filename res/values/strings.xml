@@ -12,7 +12,7 @@
     <string name="options_button"> Settings </string>
     
     <string name="moreCards">More Cards</string>
-    <string name="numCards"> Number of cards</string>
+    <string name="numCards"> Number of cards: </string>
     <string name="nineCards"> 9 </string>
     <string name="twelveCards"> 12 </string>
     <string name="fifteenCards"> 15 </string>
