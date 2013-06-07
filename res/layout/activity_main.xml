@@ -11,19 +11,21 @@
     
     <Button android:id="@+id/newgamebutton"
         style="@style/GameButtonStyle"
+        android:layout_centerInParent="true"
         android:text="@string/play_button"  
         android:visibility="visible" >
     </Button>
     
     <Button android:id="@+id/resumebutton"
         style="@style/GameButtonStyle"
+        android:layout_below="@id/newgamebutton"
         android:text="@string/resume_button"  
         android:visibility="gone" >
     </Button> 
     
     <Button android:id="@+id/optionsButton"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/newgamebutton"
+        android:layout_below="@id/resumebutton"
         android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

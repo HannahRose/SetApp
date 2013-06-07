@@ -91,18 +91,15 @@ public class PlayGameActivity extends Activity {
 	}
 	
 	
-	@Override
-	public void onSaveInstanceState(Bundle state) {
-		super.onSaveInstanceState(state);
-
-	}
-	
-	/** Selects or unselects a card if the button is pressed. */
+	/** Selects or unselects a card if the button is pressed. 
+	 * If the card is selected, it will become unselected, and visa versa. 
+	 */
 	public void selectCard(View view) {
 				 
 		CardView c = (CardView) view;
 		
-		if (c.hasCard()) { //only select or unselect a button if it has a corresponding card
+		//only select or unselect a button if it has a corresponding card
+		if (c.hasCard()) { 
 			if (c.isSelected()) {
 				c.setSelected(false);
 				selected.remove(c);
@@ -111,11 +108,6 @@ public class PlayGameActivity extends Activity {
 				c.setSelected(true);
 				selected.add(c);
 			}
-		}
-		else {
-			c.setSelected(false);
-			selected.remove(c); 
-			System.out.println("Button without card was selected.");
 		}
 		
 		c.invalidate();
@@ -141,6 +133,25 @@ public class PlayGameActivity extends Activity {
 			}
 		}
 	}
+	
+	/** Adds another row of cards to the game, if possible. 
+	private void addCards() {
+		TableLayout layout = (TableLayout) findViewById(R.id.layout);
+		
+		for (int row = 0; row < layout.getChildCount(); row++) {
+			TableRow T = (TableRow) layout.getChildAt(row);
+			
+			if (T.getVisibility() == GONE) {
+				T.setVisibility(VISIBLE);
+				for (int button = 0; button < T.getChildCount(); button++) {
+					CardView c = (CardView) T.getChildAt(button);
+					buttons.add(c);
+				}
+				break;
+			}
+		}
+	}
+	*/
 	
 	private void dealCards() {
 		

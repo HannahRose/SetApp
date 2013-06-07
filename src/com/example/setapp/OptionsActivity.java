@@ -1,5 +1,7 @@
 package com.example.setapp;
 
+import java.util.Vector;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -12,14 +14,20 @@ import android.widget.ToggleButton;
 
 public class OptionsActivity extends Activity {
 	
-	public static int numCards = 12;	// Default value for the number of cards to display.
+	Vector<ToggleButton> numCardButtons = new Vector<ToggleButton>();
 	
+	public static int numCards = 12;	// Default value for the number of cards to display.
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_options);
 		// Show the Up button in the action bar.
-		setupActionBar();	
+		setupActionBar();
+		
+		numCardButtons.add( (ToggleButton) findViewById(R.id.nineCards));
+		numCardButtons.add( (ToggleButton) findViewById(R.id.twelveCards));
+		numCardButtons.add( (ToggleButton) findViewById(R.id.fifteenCards));
 	}
 
 	/**
@@ -56,6 +64,25 @@ public class OptionsActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	public void onSaveInstanceState(Bundle state) {
+		super.onSaveInstanceState(state);
+		
+		for (int i = 0; i < numCardButtons.size(); i++) {
+			if (numCardButtons.get(i).isChecked() == true) {
+				state.putInt("checked button", i);
+				break;
+			}
+		}
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedState) {
+		
+		int checked = savedState.getInt("checked button");
+		numCardButtons.get(checked).setChecked(true);
+	}
+	
 	public void setCardNum(View view) {
 		
 		if (view instanceof ToggleButton) {
@@ -66,13 +93,9 @@ public class OptionsActivity extends Activity {
 			// Ensures that the only checked button is the one corresponding
 			// to the current number of cards (the last button clicked).
 			//FIXME Make this more elegant.
-			ToggleButton a = (ToggleButton) findViewById(R.id.nineCards);
-			ToggleButton b = (ToggleButton) findViewById(R.id.twelveCards);
-			ToggleButton c = (ToggleButton) findViewById(R.id.fifteenCards);
-			
-			a.setChecked(false);
-			b.setChecked(false);
-			c.setChecked(false);
+			for (ToggleButton b : numCardButtons) {
+				b.setChecked(false);
+			}
 			
 			t.setChecked(true);
 

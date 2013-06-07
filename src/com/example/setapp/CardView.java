@@ -203,12 +203,14 @@ public class CardView extends View {
 		// Set the shape on the card.
 		if (myCard.getShape() == Shape.DIAMOND) {
 			Diamond(shapeWidth, shapeHeight, xCenter, yCenter);
+			foreground.setStrokeJoin(Paint.Join.MITER);
 		}
 		else if (myCard.getShape() == Shape.OVAL) {
 			Oval(shapeWidth, shapeHeight, xCenter, yCenter);
 		}
 		else {
 			Squiggle(shapeWidth, shapeHeight, xCenter, yCenter);
+			foreground.setStrokeJoin(Paint.Join.ROUND);
 		}
 		
 		// Set the fill type. 

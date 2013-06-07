@@ -2,7 +2,6 @@ package com.example.setapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -12,9 +11,6 @@ public class MainActivity extends Activity {
 	
 	/** Flag indicating whether or not there is already a game in progress. */
 	private boolean gameInProgress = false;
-	
-	/** The integer value to indicate a hidden button. */
-	private final int GONE = 8;
 	
 	/** The integer value to indicate a visible button. */
 	private final int VISIBLE = 0;
@@ -59,10 +55,7 @@ public class MainActivity extends Activity {
     	// Change the text on the main button depending on whether
     	// or not a game is in progress already.
     	if (gameInProgress) {
-    		Button play = (Button) findViewById(R.id.newgamebutton);
     		Button resume = (Button) findViewById(R.id.resumebutton);
-    		
-    		play.setVisibility(GONE);
     		resume.setVisibility(VISIBLE);
     	}
     	
