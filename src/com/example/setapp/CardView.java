@@ -41,10 +41,6 @@ public class CardView extends View {
 	private int BLUE = 0xdd00bfff;
 	private int TRANSPARENT = 0x0000000;
 	
-	private int THIN = 8;
-	private int THICK = 10;
-	private int NUMLINES = 7;
-	
 	public CardView(Context context) {
 		super(context);
 			
@@ -66,11 +62,11 @@ public class CardView extends View {
 	private void initialize() {
 		
 		setBackgroundColor(WHITE);
-		foreground.setStrokeWidth(THICK);	//FIXME scale?
+		foreground.setStrokeWidth(10);	//FIXME scale
 		foreground.setStyle(Paint.Style.STROKE);
-		fill.setStrokeWidth(THIN);
+		fill.setStrokeWidth(8);
 		fill.setStyle(Paint.Style.FILL);
-		edges.setStrokeWidth(THIN);
+		edges.setStrokeWidth(8);
 		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
 		
@@ -187,13 +183,10 @@ public class CardView extends View {
 		
 		if (selected) {
 			edges.setColor(BLUE);
-			
-			System.out.println(myCard.toString());
 		}
 		else {
 			edges.setColor(GREY);
 		}
-
 	}
 
 	
@@ -220,23 +213,22 @@ public class CardView extends View {
 			foreground.setStrokeJoin(Paint.Join.ROUND);
 		}
 		
-		// Set the fill type (do nothing if the fill is open).
+		// Set the fill type. 
 		if (myCard.getFill() == Fill.SOLID) {
-			fillBitmap.eraseColor(fill.getColor());	// Color the entire bitmap
+			fillBitmap.eraseColor(fill.getColor());	// Fill the bitmap with the specified color	
 		}
 		else if (myCard.getFill() == Fill.LINED) {
 			
-			float y = shapeHeight/NUMLINES; 
-			foreground.setStrokeWidth(THIN);
+			float y = shapeHeight/6; 
 			
 			while (y < shapeHeight) {
 				fillCanvas.drawLine(0, y, 2*shapeWidth, y, foreground);
-				y += shapeHeight/NUMLINES;
-			}
-			foreground.setStrokeWidth(THICK);
+				y += shapeHeight/6;
+			}			
 		}
 		
-		// Create a new BitmapShader from the bitmap we just filled.
+		// Do nothing if the fill is open
+		
 		myFill = new BitmapShader(fillBitmap, Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 		fill.setShader(myFill);
 	}

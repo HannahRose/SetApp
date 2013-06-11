@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -34,6 +35,10 @@ public class PlayGameActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();	
 		
+		// Lock the orientation to landscape.
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		/* Commented out while changing game layout.
+		
 		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
 		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
 		
@@ -46,10 +51,12 @@ public class PlayGameActivity extends Activity {
 				rowFour.setVisibility(GONE);
 			}
 		}
+		
 		else {
 			rowFour.setVisibility(VISIBLE);
 			rowFive.setVisibility(VISIBLE);
 		}
+		*/
 		
 		deck = new Deck();
 		addAllButtons();
@@ -98,20 +105,26 @@ public class PlayGameActivity extends Activity {
 				 
 		CardView c = (CardView) view;
 		
-		//only select or unselect a button if it has a corresponding card
-		if (c.hasCard()) { 
-			if (c.isSelected()) {
-				c.setSelected(false);
-				selected.remove(c);
-			}
-			else {
-				c.setSelected(true);
-				selected.add(c);
-			}
+		if (c.isSelected()) {
+			c.setSelected(false);
+			selected.remove(c);
 		}
 		
-		c.invalidate();
-		
+		else if (c.hasCard()) { // Not selected and has card
+			if (selected.size() > 2) { // A max of three cards can be selected at a time.
+				for (CardView cv : selected) {	// Unselect all the other cards
+					cv.setSelected(false);
+					cv.invalidate();
+				}
+				selected.removeAllElements();
+			}
+			
+			// Select the original card
+			c.setSelected(true);
+			selected.add(c);
+		}
+		c.invalidate();	// Redraw the card
+	
 		if (selected.size() == 3) { // If there are three cards selected
 			checkIfSet();
 		}
@@ -120,16 +133,21 @@ public class PlayGameActivity extends Activity {
 	/** Adds all buttons that are currently visible to the relevant vector. */
 	private void addAllButtons() {
 		
-		TableLayout layout = (TableLayout) findViewById(R.id.layout);
+		TableLayout layout = (TableLayout) findViewById(R.id.cardTable);
 		
 		for (int row = 0; row < layout.getChildCount(); row++) {
-			TableRow T = (TableRow) layout.getChildAt(row);
-			
-			if (T.getVisibility() == VISIBLE) {
-				for (int button = 0; button < T.getChildCount(); button++) {
-					CardView c = (CardView) T.getChildAt(button);
-					buttons.add(c);
+			try {
+				TableRow T = (TableRow) layout.getChildAt(row);
+				
+				if (T.getVisibility() == VISIBLE) {
+					for (int button = 0; button < T.getChildCount(); button++) {
+						CardView c = (CardView) T.getChildAt(button);
+						buttons.add(c);
+					}
 				}
+			}
+			catch (ClassCastException c) {
+				System.out.println(c.getMessage() + ": Number of Children: " + layout.getChildCount());
 			}
 		}
 	}
@@ -171,20 +189,20 @@ public class PlayGameActivity extends Activity {
 		boolean result = isSet();
 		
 		//if a set, flash and redeal, update numsetsfound
-		for (CardView cv : selected) {
+		if (result) {
 			
-			if (result) { 	//if a set, flash and redeal, update numsetsfound
+			for(CardView cv : selected) { 	
 				cv.setCard(deck.getTopCard());
-				//numSets++;
+				cv.setSelected(false);
+				cv.invalidate();	// invalidate the selected cards so they will be redrawn.
 			}
-			//else display "not a set!" message(?)
-
-			// Unselect and invalidate all the selected cards so they will be redrawn.
-			cv.setSelected(false);
-			cv.invalidate();
+			
+			selected.removeAllElements();
+			//numSets++;
 		}
+		
+		//else display "not a set!" message(?)
 
-		selected.removeAllElements();
 	}
 	
 	private boolean isSet() {
