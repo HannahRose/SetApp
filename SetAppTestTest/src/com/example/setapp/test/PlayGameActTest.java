@@ -14,9 +14,6 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 	/** The integer value to indicate a visible button. */
 	private final int VISIBLE = 0;
 	
-	/** The integer value to indicate an invisible button. */
-	private final int INVISIBLE = 4;
-	
 	/** The integer value to indicate a hidden button.
 	private final int GONE = 8;  */
 	
@@ -35,10 +32,13 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 	
 	public void testPreconditions() {
 		
+		int leftPad = layout.getPaddingLeft();
+		System.err.println("Left padding: " + leftPad);
+		
 		TextView setsFound = (TextView) gameActivity.findViewById(com.example.setapp.R.id.numSets);
 		
-		assertEquals(setsFound.getVisibility(), VISIBLE);
-		assertEquals(setsFound.getText(), (CharSequence) "0");
+		assertEquals(VISIBLE, setsFound.getVisibility());
+		assertEquals((CharSequence) "0", setsFound.getText());
 		
 		
 	}

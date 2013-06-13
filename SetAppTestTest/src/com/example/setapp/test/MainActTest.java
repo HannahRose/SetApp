@@ -57,7 +57,7 @@ public class MainActTest extends ActivityInstrumentationTestCase2<MainActivity> 
 		
 		Button b = (Button) v;
 		CharSequence text = b.getText();
-		assertEquals("Actual text is: " + text, text, (CharSequence) "New Game");
+		assertEquals("Actual text is: " + text, (CharSequence) expectedText, text);
 		assertEquals(b.getVisibility(), visibility);
 	}
 	
