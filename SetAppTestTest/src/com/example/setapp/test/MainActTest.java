@@ -2,8 +2,7 @@ package com.example.setapp.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.*;
 
 import com.example.setapp.MainActivity;
 

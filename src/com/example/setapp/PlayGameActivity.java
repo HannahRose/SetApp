@@ -162,6 +162,9 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		displayNumSets = (TextView) findViewById(R.id.numSets);
+		
+		String thisMany = "" + numSets;
+		displayNumSets.setText((CharSequence) thisMany);
 	}
 	
 	/** Adds another row of cards to the game, if possible. 
@@ -200,7 +203,11 @@ public class PlayGameActivity extends Activity {
 	 */
 	private void checkIfSet() {
 		
-		boolean result = isSet();
+		Card a = selected.get(0).getCard();
+		Card b = selected.get(1).getCard();
+		Card c = selected.get(2).getCard();
+		
+		boolean result = isSet(a, b, c);
 		
 		//if a set, flash and redeal, update numsetsfound
 		if (result) {
@@ -222,13 +229,9 @@ public class PlayGameActivity extends Activity {
 
 	}
 	
-	private boolean isSet() {
+	public boolean isSet(Card a, Card b, Card c) {
 		
 //		Debug.startMethodTracing("is_set");
-		
-		Card a = selected.get(0).getCard();
-		Card b = selected.get(1).getCard();
-		Card c = selected.get(2).getCard();
 		
 		boolean validNum = checkNum(a, b, c);
 		boolean validCol = checkColor(a, b, c);

@@ -52,5 +52,16 @@ public class CardTest extends TestCase {
 					"2 GREEN LINED DIAMONDS.",
 					myCard.toString());
 	}
+	
+	public void testEquals() {
+		
+		Card myCard = new Card(2, Color.RED, Shape.DIAMOND, Fill.OPEN);
+		Card sameCard = new Card(2, Color.RED, Shape.DIAMOND, Fill.OPEN);
+		Card diffCard = new Card(2, Color.GREEN, Shape.DIAMOND, Fill.OPEN);
+		
+		assertTrue("Card equality returns a false negative.", myCard.equals(sameCard));
+		assertFalse("Card equality returns a false positive.", myCard.equals(diffCard));
+		
+	}
 
 }

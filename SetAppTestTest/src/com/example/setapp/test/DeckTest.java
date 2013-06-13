@@ -32,28 +32,23 @@ public class DeckTest extends TestCase {
 		}
 	}
 
-	public DeckTest() { // Why is this needed?
+	public DeckTest() {
 		super();
 	}
-
-	public void testPreconditions() {
-
-	}
-	
 	
 	public void testGetTopCard() {
 		
-		myDeck = new Deck(); 
 		int size = myDeck.size();
-		assertEquals("The deck has an incorrect number of cards.", size, 81);
 		
 		Card c;
 		// Pop all the cards off the deck.
 		while(size > 0) {
-			c = myDeck.getTopCard();
-			size--;
-			assertNotNull("Non-empty deck returned a null card.", c);
+			
 			assertEquals("Deck size is not correct.", size, myDeck.size());
+			c = myDeck.getTopCard();
+			
+			assertNotNull("Non-empty deck returned a null card.", c);
+			size--;
 		}
 		
 		assertEquals("Deck is not empty!", 0, myDeck.size());
