@@ -17,13 +17,13 @@ public class Card {
 		OPEN, LINED, SOLID
 	}
 	
-	private int number;
+	protected int number;
 	
-	private Color color;
+	protected Color color;
 	
-	private Shape shape;
+	protected Shape shape;
 	
-	private Fill fill;
+	protected Fill fill;
 		
 	/** Constructor for Card objects. */
 	public Card(int thisNum, Color thisColor, Shape thisShape, Fill thisFill) {
@@ -35,10 +35,6 @@ public class Card {
 		color = thisColor;
 		shape = thisShape;
 		fill = thisFill;
-	}
-	
-	public void draw() {
-		//FIXME
 	}
 	
 	/** Retrieve information about the card. */ 

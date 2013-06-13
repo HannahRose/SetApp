@@ -1,35 +1,43 @@
 package com.example.setapp;
 
 import java.util.Vector;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
-import android.os.Bundle;
+import android.os.*;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.view.*;
+import android.widget.*;
 
-
+/** An activity to play the game! */
 public class PlayGameActivity extends Activity {
 	
+	/** A shuffled stack of the cards. */
 	private Deck deck;
 		
+	/** Keeps track of which cards are selected (max 3). */
 	private Vector<CardView> selected = new Vector<CardView>();
 	
-	//private numSets = 0;	// Zero sets found so far.
+	/** Keeps track of the number of sets found by the player. */
+	private int numSets = 0;	// Zero sets found so far.
 	
+	/** Keeps track of all the visible cards (CardViews). */
 	private Vector<CardView> buttons = new Vector<CardView>();
 	
+	/** A view to display the number of sets found so far. FIXME */
+	private TextView displayNumSets;
+	
+	/** The integer value to indicate a visible button. */
 	private int VISIBLE = 0;
+	
+	/** The integer value to indicate a hidden button. */
 	private int GONE = 8;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+//		Debug.startMethodTracing("game");
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play_game);
 		// Show the Up button in the action bar.
@@ -37,26 +45,8 @@ public class PlayGameActivity extends Activity {
 		
 		// Lock the orientation to landscape.
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		/* Commented out while changing game layout.
 		
-		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
-		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
-		
-		int numCards = OptionsActivity.numCards;
-		
-		if (numCards < 15) {
-			rowFive.setVisibility(GONE);
-			
-			if (numCards < 12) {
-				rowFour.setVisibility(GONE);
-			}
-		}
-		
-		else {
-			rowFour.setVisibility(VISIBLE);
-			rowFive.setVisibility(VISIBLE);
-		}
-		*/
+		setVisibleRows();
 		
 		deck = new Deck();
 		addAllButtons();
@@ -130,31 +120,54 @@ public class PlayGameActivity extends Activity {
 		}
 	}
 	
+	/** Sets the rows that should be visible or gone for the game. */
+	private void setVisibleRows() {
+		
+//		TableLayout cardTable = (TableLayout) findViewById(R.id.cardTable);
+		
+		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
+		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
+		
+		int numCards = OptionsActivity.numCards;
+		
+		if (numCards < 15) {
+			rowFive.setVisibility(GONE);
+			
+			if (numCards < 12) {
+				rowFour.setVisibility(GONE);
+			}
+		}
+		
+		else {
+			rowFour.setVisibility(VISIBLE);
+			rowFive.setVisibility(VISIBLE);
+		}
+	}
+	
 	/** Adds all buttons that are currently visible to the relevant vector. */
 	private void addAllButtons() {
 		
 		TableLayout layout = (TableLayout) findViewById(R.id.cardTable);
 		
 		for (int row = 0; row < layout.getChildCount(); row++) {
-			try {
-				TableRow T = (TableRow) layout.getChildAt(row);
-				
-				if (T.getVisibility() == VISIBLE) {
-					for (int button = 0; button < T.getChildCount(); button++) {
-						CardView c = (CardView) T.getChildAt(button);
-						buttons.add(c);
-					}
+			
+			TableRow T = (TableRow) layout.getChildAt(row);
+			
+			if (T.getVisibility() == VISIBLE) {
+				for (int button = 0; button < T.getChildCount(); button++) {
+					CardView c = (CardView) T.getChildAt(button);
+					buttons.add(c);
 				}
 			}
-			catch (ClassCastException c) {
-				System.out.println(c.getMessage() + ": Number of Children: " + layout.getChildCount());
-			}
 		}
+		
+		displayNumSets = (TextView) findViewById(R.id.numSets);
 	}
 	
 	/** Adds another row of cards to the game, if possible. 
+	 * To be reimplemented if we can dynamically change when settings shift.
 	private void addCards() {
-		TableLayout layout = (TableLayout) findViewById(R.id.layout);
+		TableLayout layout = (TableLayout) findViewById(R.id.cardTable);
 		
 		for (int row = 0; row < layout.getChildCount(); row++) {
 			TableRow T = (TableRow) layout.getChildAt(row);
@@ -171,6 +184,7 @@ public class PlayGameActivity extends Activity {
 	}
 	*/
 	
+	/** Add a card to each CardView in the list of visible buttons. */
 	private void dealCards() {
 		
 		for (CardView c : buttons) {
@@ -197,8 +211,11 @@ public class PlayGameActivity extends Activity {
 				cv.invalidate();	// invalidate the selected cards so they will be redrawn.
 			}
 			
+			String thisMany = ++numSets + "";
+			displayNumSets.setText((CharSequence) thisMany);
 			selected.removeAllElements();
-			//numSets++;
+			
+//			Debug.stopMethodTracing();
 		}
 		
 		//else display "not a set!" message(?)
@@ -206,6 +223,8 @@ public class PlayGameActivity extends Activity {
 	}
 	
 	private boolean isSet() {
+		
+//		Debug.startMethodTracing("is_set");
 		
 		Card a = selected.get(0).getCard();
 		Card b = selected.get(1).getCard();
@@ -216,19 +235,22 @@ public class PlayGameActivity extends Activity {
 		boolean validShape = checkShape(a, b, c);
 		boolean validFill = checkFill(a, b, c);
 		
+//		Debug.stopMethodTracing();
+		
+		//Implement feedback for invalid sets? FIXME
 		return (validNum && validCol && validShape && validFill); 
 	}
 	
 	private boolean checkNum(Card a, Card b, Card c) {
 		
 		// All same
-		if ((a.getNumber() == b.getNumber()) && (b.getNumber() == c.getNumber())) {
+		if ((a.number == b.number) && (b.number == c.number)) {
 			return true;
 		}
 		
 		// All different
-		else if ((a.getNumber() != b.getNumber()) && (a.getNumber() != c.getNumber())
-							&& (b.getNumber() != c.getNumber())) {
+		else if ((a.number != b.number) && (a.number != c.number)
+							&& (b.number != c.number)) {
 			return true;
 		}
 		
@@ -238,13 +260,13 @@ public class PlayGameActivity extends Activity {
 	private boolean checkColor(Card a, Card b, Card c) {
 			
 			// All same
-			if ((a.getColor() == b.getColor()) && (b.getColor() == c.getColor())) {
+			if ((a.color == b.color) && (b.color == c.color)) {
 				return true;
 			}
 			
 			// All different
-			else if ((a.getColor() != b.getColor()) && (a.getColor() != c.getColor())
-								&& (b.getColor() != c.getColor())) {
+			else if ((a.color != b.color) && (a.color != c.color)
+								&& (b.color != c.color)) {
 				return true;
 			}
 			
@@ -254,13 +276,13 @@ public class PlayGameActivity extends Activity {
 	private boolean checkShape(Card a, Card b, Card c) {
 		
 		// All same
-		if ((a.getShape() == b.getShape()) && (b.getShape() == c.getShape())) {
+		if ((a.shape == b.shape) && (b.shape == c.shape)) {
 			return true;
 		}
 		
 		// All different
-		else if ((a.getShape() != b.getShape()) && (a.getShape() != c.getShape())
-							&& (b.getShape() != c.getShape())) {
+		else if ((a.shape != b.shape) && (a.shape != c.shape)
+							&& (b.shape != c.shape)) {
 			return true;
 		}
 		
@@ -270,13 +292,13 @@ public class PlayGameActivity extends Activity {
 	private boolean checkFill(Card a, Card b, Card c) {
 			
 			// All same
-			if ((a.getFill() == b.getFill()) && (b.getFill() == c.getFill())) {
+			if ((a.fill == b.fill) && (b.fill == c.fill)) {
 				return true;
 			}
 			
 			// All different
-			else if ((a.getFill() != b.getFill()) && (a.getFill() != c.getFill())
-								&& (b.getFill() != c.getFill())) {
+			else if ((a.fill != b.fill) && (a.fill != c.fill)
+								&& (b.fill != c.fill)) {
 				return true;
 			}
 			

@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     		resume.setVisibility(VISIBLE);
     	}
     	
-    	super.onRestoreInstanceState(savedState);	
+    	super.onRestoreInstanceState(savedState);
 	}
     
     /** Switch to a new activity to start a game. 
@@ -72,6 +72,10 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    /** Switch to a new activity to change the game settings.
+     * 
+     * @param view The current view.
+     */
     public void options(View view) {
     	Intent intent = new Intent(this, OptionsActivity.class);
     	startActivity(intent);

@@ -41,6 +41,9 @@ public class CardView extends View {
 	private int BLUE = 0xdd00bfff;
 	private int TRANSPARENT = 0x0000000;
 	
+	private int THIN = 8;
+	private int THICK = 10;
+	
 	public CardView(Context context) {
 		super(context);
 			
@@ -62,11 +65,11 @@ public class CardView extends View {
 	private void initialize() {
 		
 		setBackgroundColor(WHITE);
-		foreground.setStrokeWidth(10);	//FIXME scale
+		foreground.setStrokeWidth(THICK);	//FIXME scale
 		foreground.setStyle(Paint.Style.STROKE);
-		fill.setStrokeWidth(8);
+		fill.setStrokeWidth(THIN);
 		fill.setStyle(Paint.Style.FILL);
-		edges.setStrokeWidth(8);
+		edges.setStrokeWidth(THIN);
 		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
 		
@@ -235,7 +238,7 @@ public class CardView extends View {
 	
 	public void Diamond(float width, float height, float xCenter, float yCenter) {
 			
-		final int diamondVert = 4; // Number of verticies of a diamond.
+		final int diamondVert = 4; // Number of vertices of a diamond.
 		
 		float[] xpoints = {xCenter-width/2, xCenter, xCenter+width/2, xCenter};
 		float[] ypoints = {yCenter, yCenter-height/2, yCenter, yCenter+height/2};

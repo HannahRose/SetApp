@@ -20,10 +20,9 @@
     <style name="GameButtonStyle" >
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height" > wrap_content </item>
-        <item name="android:textSize"> 40sp </item>
+        <item name="android:textSize"> 38sp </item>
         <item name="android:typeface"> serif </item>
         <item name="android:textStyle"> italic </item>
-        <item name="android:onClick"> playGame </item>
     </style>
     
     <style name="CardStyle" >

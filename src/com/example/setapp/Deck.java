@@ -2,11 +2,12 @@ package com.example.setapp;
 
 import java.util.Stack;
 
-import com.example.setapp.Card.Color;
-import com.example.setapp.Card.Fill;
-import com.example.setapp.Card.Shape;
+//import android.os.Debug;
 
-/** A class that holds a stack of cards. */
+import com.example.setapp.Card.*;
+
+
+/** A class that holds a shuffled stack of cards. */
 public class Deck {
 
 	/** The total (maximum) number of cards that will be in the deck. */
@@ -17,6 +18,7 @@ public class Deck {
 	/** Creates a new deck of cards and shuffles them. */
 	public Deck() {
 		
+//		Debug.startMethodTracing("deck");
 		
 		// Create all the cards in the deck.
 		for (int num = 0; num < 3; num++) { // Yuck, icky nesting.
@@ -32,20 +34,25 @@ public class Deck {
 
 		
 		// Shuffle the deck using the Fisher-Yates algorithm
+		Card here;
+		Card copy;
+		
 		for (int i = 0; i < NUMCARDS; i++) {
 			
-			Card here = deck.get(i);
+			here = deck.get(i);
 
 			// Generate a random position for the card.
 			double rand = i*Math.random();
 			int pos = (int) rand;
 
-			Card copy = deck.get(pos); // The card currently at the given position.
+			copy = deck.get(pos); // The card currently at the given position.
 
 			// Swap the positions of the two cards.
 			deck.setElementAt(here, pos);
 			deck.setElementAt(copy, i);	
 		}
+		
+//		Debug.stopMethodTracing();
 		
 	}
 		
