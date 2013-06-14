@@ -270,5 +270,4 @@ public class CardView extends View {
 		
 		foreground.setStrokeJoin(Paint.Join.ROUND);
 	}
-
 }

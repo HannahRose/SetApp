@@ -200,25 +200,6 @@ public class PlayGameActivity extends Activity {
 		setDisplayNumSets();
 	}
 	
-	/** Adds another row of cards to the game, if possible. 
-	 * To be reimplemented if we can dynamically change when settings shift.
-	private void addCards() {
-		TableLayout layout = (TableLayout) findViewById(R.id.cardTable);
-		
-		for (int row = 0; row < layout.getChildCount(); row++) {
-			TableRow T = (TableRow) layout.getChildAt(row);
-			
-			if (T.getVisibility() == GONE) {
-				T.setVisibility(VISIBLE);
-				for (int button = 0; button < T.getChildCount(); button++) {
-					CardView c = (CardView) T.getChildAt(button);
-					buttons.add(c);
-				}
-				break;
-			}
-		}
-	}
-	*/
 	
 	/** Add a card to each CardView in the list of visible buttons. */
 	private void dealCards() {
