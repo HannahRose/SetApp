@@ -46,8 +46,18 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 		
 		TextView setsFound = (TextView) gameActivity.findViewById(com.example.setapp.R.id.numSets);
 		
-		assertEquals(VISIBLE, setsFound.getVisibility());
-		assertEquals((CharSequence) "0", setsFound.getText());
+		assertEquals("Sets found button is not visible.", VISIBLE, setsFound.getVisibility());
+		assertEquals((CharSequence) "Sets found: \n0", setsFound.getText());
+		
+		int[] location = new int[2];
+		
+		setsFound.getLocationOnScreen(location);
+		System.err.println("Location: (" + location[0] + ", " + location[1] + ")");
+		System.err.println("Dimensions: " + setsFound.getHeight() + " by " + setsFound.getWidth());
+		
+		if (setsFound.getWidth() < 1) {
+			fail("Width is zero.");
+		}
 		
 		// Find a set and test again FIXME
 		

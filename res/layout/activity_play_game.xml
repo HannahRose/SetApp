@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     tools:context=".PlayGameActivity" >
    	
     <TableLayout  android:id="@+id/cardTable"
@@ -109,7 +109,35 @@
     </TableLayout>
     
     <TextView android:id="@+id/numSets"
-        style="@style/GameButtonStyle"
+        style="@style/SetsFoundStyle"
+        android:text="@string/default_button"
         android:layout_toLeftOf="@id/cardTable"> </TextView>
+    
+    <FrameLayout android:id="@+id/notASet"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp" 
+        android:background="#dddddddd"
+        android:paddingBottom="@dimen/frame_vertical_margin"
+	    android:paddingLeft="@dimen/frame_horizontal_margin"
+	    android:paddingRight="@dimen/frame_horizontal_margin"
+	    android:paddingTop="@dimen/frame_vertical_margin"
+        android:visibility="gone" > 
+        
+        <Button android:id="@+id/notSetText"
+        android:text="@string/not_a_set"
+        android:background="#dddddddd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_gravity="top|center"> </Button>
+        
+        <Button android:id="@+id/dismiss"
+        android:text="@string/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:onClick="dismissNotSet"
+        android:layout_gravity="bottom|center"> </Button>
+    
+    </FrameLayout>
 	    
 </RelativeLayout>

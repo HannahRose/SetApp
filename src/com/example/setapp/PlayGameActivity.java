@@ -1,13 +1,20 @@
 package com.example.setapp;
 
 import java.util.Vector;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.os.*;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.*;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 /** An activity to play the game! */
 public class PlayGameActivity extends Activity {
@@ -26,6 +33,8 @@ public class PlayGameActivity extends Activity {
 	
 	/** A view to display the number of sets found so far. FIXME */
 	private TextView displayNumSets;
+	
+	private FrameLayout notASet;
 	
 	/** The integer value to indicate a visible button. */
 	private int VISIBLE = 0;
@@ -123,7 +132,31 @@ public class PlayGameActivity extends Activity {
 	/** Sets the rows that should be visible or gone for the game. */
 	private void setVisibleRows() {
 		
-//		TableLayout cardTable = (TableLayout) findViewById(R.id.cardTable);
+		
+		/*
+		TableLayout cardTable = (TableLayout) findViewById(R.id.cardTable);
+		
+		//Temporary debugging
+		for (int i = 0; i < cardTable.getChildCount(); i++) {
+			TableRow T = (TableRow) cardTable.getChildAt(i);
+			T.setVisibility(GONE);
+		}
+		
+		int TABLE_COLUMN = 2;
+		
+		TableRow.LayoutParams tableRowLayout = new TableRow.LayoutParams(TABLE_COLUMN);
+		TableRow.LayoutParams cardLayout = new TableRow.LayoutParams();
+		
+		Context mContext = cardTable.getContext();
+		
+		TableRow t;
+		CardView c;
+		
+		int rows = OptionsActivity.numCards/3;
+		
+		for (int i = 0; i < rows; i++) {
+			t = new TableRow(mContext);
+		} */
 		
 		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
 		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
@@ -162,9 +195,9 @@ public class PlayGameActivity extends Activity {
 		}
 		
 		displayNumSets = (TextView) findViewById(R.id.numSets);
+		notASet = (FrameLayout) findViewById(R.id.notASet);
 		
-		String thisMany = "" + numSets;
-		displayNumSets.setText((CharSequence) thisMany);
+		setDisplayNumSets();
 	}
 	
 	/** Adds another row of cards to the game, if possible. 
@@ -218,15 +251,36 @@ public class PlayGameActivity extends Activity {
 				cv.invalidate();	// invalidate the selected cards so they will be redrawn.
 			}
 			
-			String thisMany = ++numSets + "";
-			displayNumSets.setText((CharSequence) thisMany);
+			numSets++;
+			setDisplayNumSets();
 			selected.removeAllElements();
 			
 //			Debug.stopMethodTracing();
 		}
 		
-		//else display "not a set!" message(?)
+		//else display "not a set!" message
+		else {
+			notASet.setVisibility(VISIBLE);
+		}
+	}
+	
+	public void dismissNotSet(View v) {
+		notASet.setVisibility(GONE);
+		
+		for(CardView cv : selected) {
+			cv.setSelected(false);
+			cv.invalidate();	// invalidate the selected cards so they will be redrawn.
+		}
 
+		selected.removeAllElements();
+	}
+	
+	private void setDisplayNumSets() {
+		String thisMany = "Sets found: \n" + numSets;
+		displayNumSets.setText((CharSequence) thisMany);
+		
+		System.err.println("Width: " + displayNumSets.getWidth());
+		System.err.println("Text: " + displayNumSets.getText());
 	}
 	
 	public boolean isSet(Card a, Card b, Card c) {

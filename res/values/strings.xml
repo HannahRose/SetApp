@@ -10,6 +10,8 @@
     <string name="default_button">I am a button!</string>
     <string name="resume_button">Resume Game</string>
     <string name="options_button"> Settings </string>
+    <string name="not_a_set" > Not a valid set! </string>
+    <string name="ok" > Okay. </string>
     
     <string name="moreCards">More Cards</string>
     <string name="numCards"> Number of cards: </string>
