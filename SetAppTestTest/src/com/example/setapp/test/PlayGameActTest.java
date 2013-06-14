@@ -63,6 +63,9 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 		
 	}
 	
+	/** Some limited tests to see if sets are checked properly.
+	 * Checks a "normal" set, a set that is all different, and an invalid set.
+	 */
 	public void testSetCheck() {
 		
 		//Test all different
@@ -73,19 +76,24 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 		boolean result = gameActivity.isSet(a, b, c); 
 		
 		assertEquals("Failed to identify a valid set.", true, result);
-		
-		result = gameActivity.isSet(c, a, b); 
-		assertEquals("Failed to identify a valid set.", true, result);
-		
+
 		Card d = new Card(2, Color.GREEN, Shape.DIAMOND, Fill.OPEN);
 		
 		result = gameActivity.isSet(b, c, d);
 		assertEquals("Validated an incorrect set.", false, result);
+		
+		Card e = new Card(2, Color.GREEN, Shape.DIAMOND, Fill.LINED);
+		Card f = new Card(2, Color.GREEN, Shape.DIAMOND, Fill.SOLID);
+		
+		result = gameActivity.isSet(d, e, f);
+		assertEquals("Failed to identify a valid set.", true, result);
+
 	}
 	
 	
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		gameActivity.finish();
 	}
 
 }

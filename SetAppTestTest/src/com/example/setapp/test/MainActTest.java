@@ -38,17 +38,20 @@ public class MainActTest extends ActivityInstrumentationTestCase2<MainActivity> 
 		
 	}
 	
+	/** Basic preconditions required for other tests. */
 	public void testPreconditions() throws NullPointerException {
 		assertEquals("Wrong number of children in main layout.", layout.getChildCount(), CHILD_COUNT);
 	}
 	
-	public void testButtons() throws NullPointerException {
+	/** Check the text and visibility of all the buttons in the main activity. */
+	public void testButtons() {
 	
 		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.newgamebutton), "New Game", VISIBLE);
-		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.resumebutton), "Resume Button", INVISIBLE);
+		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.resumebutton), "Resume Game", INVISIBLE);
 		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.optionsButton), "Settings", VISIBLE);
 	}
 	
+	/** A helper function to test the text and visibility of a button. */
 	private void testButtonHelper(View v, String expectedText, int visibility) {
 		
 		Button b = (Button) v;
@@ -57,10 +60,18 @@ public class MainActTest extends ActivityInstrumentationTestCase2<MainActivity> 
 		assertEquals("Visibility is wrong.", b.getVisibility(), visibility);
 	}
 	
+	/** Test stopping and starting the main activity to see if the resume game button appears. */
+	public void testRestartActivity() {
+		mainActivity.finish();
+		
+		mainActivity.recreate();
+		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.resumebutton), "Resume Game", VISIBLE);
+	}
+	
 	
 	@Override 
 	public void tearDown() throws Exception {
 		super.tearDown();
-		
+		mainActivity.finish();
 	}
 }
