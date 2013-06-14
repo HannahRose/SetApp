@@ -40,7 +40,6 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 		System.err.println("Left padding: " + leftPad);
 		
 		
-		
 	}
 	
 	public void testSetsFound() {

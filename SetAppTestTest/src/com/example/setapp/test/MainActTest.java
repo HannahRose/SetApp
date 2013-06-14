@@ -39,35 +39,22 @@ public class MainActTest extends ActivityInstrumentationTestCase2<MainActivity> 
 	}
 	
 	public void testPreconditions() throws NullPointerException {
-		assertEquals(layout.getChildCount(), CHILD_COUNT);
+		assertEquals("Wrong number of children in main layout.", layout.getChildCount(), CHILD_COUNT);
 	}
 	
 	public void testButtons() throws NullPointerException {
 	
-		
 		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.newgamebutton), "New Game", VISIBLE);
 		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.resumebutton), "Resume Button", INVISIBLE);
 		testButtonHelper(mainActivity.findViewById(com.example.setapp.R.id.optionsButton), "Settings", VISIBLE);
-
-		
 	}
 	
 	private void testButtonHelper(View v, String expectedText, int visibility) {
 		
 		Button b = (Button) v;
 		CharSequence text = b.getText();
-		assertEquals("Actual text is: " + text, (CharSequence) expectedText, text);
-		assertEquals(b.getVisibility(), visibility);
-	}
-	
-	public void testCreateGame() {
-		
-//		Context mContext = getInstrumentation().getContext();
-//		
-//    	Intent intent = new Intent(mainActivity, PlayGameActivity.class);
-    	
-		
-    	
+		assertEquals("Text does not match.", (CharSequence) expectedText, text);
+		assertEquals("Visibility is wrong.", b.getVisibility(), visibility);
 	}
 	
 	
