@@ -3,48 +3,38 @@ package com.example.setapp;
 import java.util.Vector;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.preference.PreferenceManager;
 
-public class Settings implements OnSharedPreferenceChangeListener {
+public class Settings {
 
 //		private static final String TAG = "Global Settings";
 	    static Settings mySettings = new Settings();
-	    protected SharedPreferences prefs;
 	    Context context;
 	    
-	    public int		numCards;
+	    protected int		numCards;
 	    protected Deck	deck;
 	    protected Vector<CardView> dealt;
 	    protected Vector<CardView> selected;
+	    protected boolean gameInProgress;
 	    
 	    public Settings() {
-	    	
+	    	gameInProgress = false;
+	    	numCards = 12;
 	    }
 
 	    public Settings instance() {
 	    	return mySettings;
 	    }
 	    
-	    public void initModel(Context app)
-	    {
-	           context = app;
-	           
-	           prefs = PreferenceManager.getDefaultSharedPreferences(app);
-	           prefs.registerOnSharedPreferenceChangeListener(this);
+	    public boolean isGameInProgress() {
+	    	return gameInProgress;
 	    }
-	    
-	    
-		/* Default preferences. */
-		public void initPrefs() {
-			//create editor
-		}
-		
-		
-		@Override
-		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
 
-		}
-	    
+	    public Deck getDeck() {
+	    	return deck;
+	    }
+
+	    public int getNumCards() {
+	    	return numCards;
+	    }
 }
+

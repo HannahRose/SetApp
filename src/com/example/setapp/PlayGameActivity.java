@@ -261,7 +261,11 @@ public class PlayGameActivity extends Activity {
 		String thisMany = "Sets found: \n" + numSets;
 		displayNumSets.setText((CharSequence) thisMany);
 		
-		displayNumSets.setGravity(Gravity.CENTER_VERTICAL);
+		/* // This isn't doing anything....
+		int padding = 10;
+		displayNumSets.setPadding(padding, padding, padding, padding);
+		displayNumSets.setBackgroundColor(0xfff8ff);
+		 */
 	}
 	
 	public boolean isSet(Card a, Card b, Card c) {

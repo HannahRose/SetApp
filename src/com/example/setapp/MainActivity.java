@@ -9,17 +9,16 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 	
-	/** Flag indicating whether or not there is already a game in progress. */
-	private boolean gameInProgress = false;
-	
 	/** The integer value to indicate a visible button. */
 	private final int VISIBLE = 0;
+	
+	private Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	
-    	
+    	settings = new Settings().instance();
     	
     	//Try to make a cool background FIXME
 //    	Deck deck = new Deck();
@@ -31,6 +30,12 @@ public class MainActivity extends Activity {
 //    	}
     	
     	setContentView(R.layout.activity_main);
+    	
+    	
+    	if (settings.isGameInProgress()) {
+    		Button resume = (Button) findViewById(R.id.resumebutton);
+    		resume.setVisibility(VISIBLE);
+    	}
     }
 
     @Override
@@ -40,29 +45,6 @@ public class MainActivity extends Activity {
         return true;
     }
     
-	@Override
-	public void onSaveInstanceState(Bundle state) {
-		super.onSaveInstanceState(state);
-		state.putBoolean("gameInProgress", gameInProgress);
-
-	}
-	
-	@Override
-	public void onRestoreInstanceState(Bundle savedState) {
-		
-		gameInProgress = savedState.getBoolean("gameInProgress");
-		
-    	System.out.println("In progress: " + gameInProgress);
-    	
-    	// Change the text on the main button depending on whether
-    	// or not a game is in progress already.
-    	if (gameInProgress) {
-    		Button resume = (Button) findViewById(R.id.resumebutton);
-    		resume.setVisibility(VISIBLE);
-    	}
-    	
-    	super.onRestoreInstanceState(savedState);
-	}
     
     /** Switch to a new activity to start a game. 
      * 
@@ -70,7 +52,7 @@ public class MainActivity extends Activity {
      */
     public void playGame(View view) {
     	Intent intent = new Intent(this, PlayGameActivity.class);
-    	gameInProgress = true;
+    	settings.gameInProgress = true;
     	startActivity(intent);
     }
     
