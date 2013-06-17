@@ -12,8 +12,8 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.TableRow;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
@@ -33,10 +33,13 @@ public class CardView extends View {
 	private Paint fill = new Paint();
 	private Paint edges = new Paint();
 	
-	Bitmap fillBitmap;
-	BitmapShader myFill;
-	Canvas fillCanvas;
-		
+	private Bitmap fillBitmap;
+	private BitmapShader myFill;
+	private Canvas fillCanvas;
+	
+	private TableRow.LayoutParams layout;
+	
+	/** Constants for paint colors. */
 	private int GREEN = 0xff008000;
 	private int RED = 0xffdd0033;
 	private int PURPLE = 0xff900080;
@@ -45,6 +48,7 @@ public class CardView extends View {
 	private int BLUE = 0xdd00bfff;
 	private int TRANSPARENT = 0x0000000;
 	
+	/** Constants for stroke width. */
 	private int THIN = 8;
 	private int THICK = 10;
 	
@@ -69,7 +73,7 @@ public class CardView extends View {
 	private void initialize(Context context) {
 		
 		setBackgroundColor(WHITE);
-		foreground.setStrokeWidth(THICK);	//FIXME scale
+		foreground.setStrokeWidth(THICK);
 		foreground.setStyle(Paint.Style.STROKE);
 		fill.setStrokeWidth(THIN);
 		fill.setStyle(Paint.Style.FILL);
@@ -81,13 +85,15 @@ public class CardView extends View {
 		Display display = wm.getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		int width = size.x;
-		int height = size.y;
 		
-		LayoutParams layout = this.getLayoutParams(); 
+		//Make this depend on the number of cards shown??
+		int width = size.x/5;
+		int height = size.y/6;
 		
-		//Set width and height!
-		
+		layout = new TableRow.LayoutParams(width, height);	
+		layout.setMargins(40, 0, 40, 0);
+	
+		requestLayout();	//Alert the system that the layout has been changed. 
 	}
 	
 	
@@ -149,6 +155,8 @@ public class CardView extends View {
 	public void onDraw(Canvas canvas) {
 		
 		super.onDraw(canvas);
+		
+		this.setLayoutParams(layout);
 				
 		float xCenter = ((float) getWidth())/2;
 		float xOffset = ((float) getWidth())/6;
@@ -236,14 +244,16 @@ public class CardView extends View {
 		if (myCard.getFill() == Fill.SOLID) {
 			fillBitmap.eraseColor(fill.getColor());	// Fill the bitmap with the specified color	
 		}
-		else if (myCard.getFill() == Fill.LINED) {
+		else if (myCard.getFill() == Fill.LINED) {	// Fill the bitmap with lines
 			
-			float y = shapeHeight/6; 
+			float y = 0;
+			foreground.setStrokeWidth(THIN);
 			
-			while (y < shapeHeight) {
-				fillCanvas.drawLine(0, y, 2*shapeWidth, y, foreground);
-				y += shapeHeight/6;
-			}			
+			while (y < height) {
+				fillCanvas.drawLine(0, y, width, y, foreground);
+				y += height/11;
+			}	
+			foreground.setStrokeWidth(THICK);
 		}
 		
 		// Do nothing if the fill is open

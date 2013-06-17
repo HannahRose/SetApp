@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -260,8 +261,7 @@ public class PlayGameActivity extends Activity {
 		String thisMany = "Sets found: \n" + numSets;
 		displayNumSets.setText((CharSequence) thisMany);
 		
-		System.err.println("Width: " + displayNumSets.getWidth());
-		System.err.println("Text: " + displayNumSets.getText());
+		displayNumSets.setGravity(Gravity.CENTER_VERTICAL);
 	}
 	
 	public boolean isSet(Card a, Card b, Card c) {
@@ -275,7 +275,7 @@ public class PlayGameActivity extends Activity {
 		
 //		Debug.stopMethodTracing();
 		
-		//Implement feedback for invalid sets? FIXME
+		//Implement more specific feedback for invalid sets? FIXME
 		return (validNum && validCol && validShape && validFill); 
 	}
 	
