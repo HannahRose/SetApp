@@ -8,7 +8,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +36,8 @@ public class PlayGameActivity extends Activity {
 	
 	private FrameLayout notASet;
 	
+	private Settings settings;
+	
 	/** The integer value to indicate a visible button. */
 	private int VISIBLE = 0;
 	
@@ -49,6 +50,9 @@ public class PlayGameActivity extends Activity {
 //		Debug.startMethodTracing("game");
 		
 		super.onCreate(savedInstanceState);
+		
+		settings = new Settings().instance();
+		
 		setContentView(R.layout.activity_play_game);
 		// Show the Up button in the action bar.
 		setupActionBar();	
@@ -133,48 +137,14 @@ public class PlayGameActivity extends Activity {
 	/** Sets the rows that should be visible or gone for the game. */
 	private void setVisibleRows() {
 		
+		int rows = settings.getNumCards()/3;	// Three cards per row
 		
-		/*
 		TableLayout cardTable = (TableLayout) findViewById(R.id.cardTable);
-		
-		//Temporary debugging
-		for (int i = 0; i < cardTable.getChildCount(); i++) {
-			TableRow T = (TableRow) cardTable.getChildAt(i);
-			T.setVisibility(GONE);
-		}
-		
-		int TABLE_COLUMN = 2;
-		
-		TableRow.LayoutParams tableRowLayout = new TableRow.LayoutParams(TABLE_COLUMN);
-		TableRow.LayoutParams cardLayout = new TableRow.LayoutParams();
-		
-		Context mContext = cardTable.getContext();
-		
 		TableRow t;
-		CardView c;
-		
-		int rows = OptionsActivity.numCards/3;
 		
 		for (int i = 0; i < rows; i++) {
-			t = new TableRow(mContext);
-		} */
-		
-		TableRow rowFour = (TableRow) findViewById(R.id.tableRow4);
-		TableRow rowFive = (TableRow) findViewById(R.id.tableRow5);
-		
-		int numCards = OptionsActivity.numCards;
-		
-		if (numCards < 15) {
-			rowFive.setVisibility(GONE);
-			
-			if (numCards < 12) {
-				rowFour.setVisibility(GONE);
-			}
-		}
-		
-		else {
-			rowFour.setVisibility(VISIBLE);
-			rowFive.setVisibility(VISIBLE);
+			t = (TableRow) cardTable.getChildAt(i);
+			t.setVisibility(VISIBLE);
 		}
 	}
 	
