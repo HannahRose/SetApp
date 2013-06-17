@@ -6,10 +6,14 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
@@ -47,22 +51,22 @@ public class CardView extends View {
 	public CardView(Context context) {
 		super(context);
 			
-		initialize();
+		initialize(context);
 	}
 
 	public CardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 			
-		initialize();
+		initialize(context);
 	}
 	
 	public CardView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 			
-		initialize();
+		initialize(context);
 	}
 	
-	private void initialize() {
+	private void initialize(Context context) {
 		
 		setBackgroundColor(WHITE);
 		foreground.setStrokeWidth(THICK);	//FIXME scale
@@ -72,6 +76,17 @@ public class CardView extends View {
 		edges.setStrokeWidth(THIN);
 		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
+		
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
+		
+		LayoutParams layout = this.getLayoutParams(); 
+		
+		//Set width and height!
 		
 	}
 	
@@ -172,6 +187,7 @@ public class CardView extends View {
 		canvas.drawRect(cardRect, edges);
 	}
 	
+	/** Draws and fills the shape, then resets the path. */
 	private void doDrawing(Canvas canvas) {
 		canvas.drawPath(cardDraw, foreground);	//draw the shape
 		canvas.drawPath(cardDraw, fill);		//fill the shape (open, solid, or lined)

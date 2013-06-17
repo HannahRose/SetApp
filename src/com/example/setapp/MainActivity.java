@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	
+    	
+    	
     	//Try to make a cool background FIXME
 //    	Deck deck = new Deck();
 //    	Bitmap bkgdBitmap;
