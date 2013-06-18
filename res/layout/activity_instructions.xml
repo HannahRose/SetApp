@@ -1,0 +1,41 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   	android:layout_gravity="center_horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:isScrollContainer="true"
+    tools:context=".InstructionsActivity" >
+    
+    <TextView
+        android:id="@+id/instructA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:text="@string/hello_world" />
+    
+    <TableRow
+        android:id="@+id/isSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_gravity="center_horizontal"> 
+        
+        <com.example.setapp.CardView
+            android:id="@+id/setCardA" > 
+        </com.example.setapp.CardView>
+        
+        <com.example.setapp.CardView
+            android:id="@+id/setCardB" > 
+        </com.example.setapp.CardView>
+        
+        <com.example.setapp.CardView
+            android:id="@+id/setCardC" > 
+        </com.example.setapp.CardView>
+        
+     </TableRow>
+    
+</TableLayout>
