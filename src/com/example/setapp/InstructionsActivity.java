@@ -69,7 +69,7 @@ public class InstructionsActivity extends Activity {
 				"(one, two, or three), color (red, green, or purple), shape (diamond, squiggle, or " +
 				"oval), and fill (solid, lined, or open). In order to form a set, three cards must " +
 				"all have the same number, or have three different numbers, all the same color, or " +
-				"three different colors, etc.";
+				"three different colors, etc. \n";
 		
 		text.setText((CharSequence) instruct);
 	}
