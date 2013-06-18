@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true" 
         android:text="@string/resume_button"  
         android:visibility="invisible" 
-        android:onClick="playGame" >
+        android:onClick="resumeGame" >
     </Button> 
     
     <Button android:id="@+id/optionsButton"

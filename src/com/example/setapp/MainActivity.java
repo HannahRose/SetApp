@@ -51,10 +51,16 @@ public class MainActivity extends Activity {
      * @param view The current view.
      */
     public void playGame(View view) {
+    	settings.gameInProgress = false;
     	Intent intent = new Intent(this, PlayGameActivity.class);
-    	settings.gameInProgress = true;
     	startActivity(intent);
     }
+    
+    public void resumeGame(View view) {
+    	Intent intent = new Intent(this, PlayGameActivity.class);
+    	startActivity(intent);
+    }
+   
     
     /** Switch to a new activity to change the game settings.
      * 

@@ -11,14 +11,16 @@ public class Settings {
 	    Context context;
 	    
 	    protected int		numCards;
-	    protected Deck	deck;
+	    protected int 		numSetsFound;
+	    protected boolean 	gameInProgress;
+	    protected Deck		deck;
 	    protected Vector<CardView> dealt;
 	    protected Vector<CardView> selected;
-	    protected boolean gameInProgress;
 	    
 	    public Settings() {
 	    	gameInProgress = false;
 	    	numCards = 12;
+	    	numSetsFound = 0;
 	    }
 
 	    public Settings instance() {
@@ -35,6 +37,26 @@ public class Settings {
 
 	    public int getNumCards() {
 	    	return numCards;
+	    }
+	    
+	    public Vector<CardView> getDealt() {
+	    	return dealt;
+	    }
+	    
+	    public Vector<CardView> getSelected() {
+	    	return selected;
+	    }
+	    
+	    public void setDeck(Deck newDeck) {
+	    	deck = newDeck;
+	    }
+	    
+	    public void setDealt(Vector<CardView> cards) {
+	    	dealt = cards;
+	    }
+	    
+	    public void setSelected(Vector<CardView> select) {
+	    	selected = select;
 	    }
 }
 

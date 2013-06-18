@@ -62,8 +62,15 @@ public class PlayGameActivity extends Activity {
 		
 		setVisibleRows();
 		
+		/* If we are restoring a saved game. */
+		if (settings.isGameInProgress()) {
+			onRestart();
+			return;
+		}
+		
+		settings.gameInProgress = true;
+		
 		deck = new Deck();
-		addAllButtons();
 		dealCards();
 	}
 
@@ -101,6 +108,35 @@ public class PlayGameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/* Save state of the game */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		settings.setDeck(deck);
+		settings.setDealt(buttons);
+		settings.setSelected(selected);	
+	}
+	
+	/* Restore saved state */
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		
+		deck = settings.getDeck();
+		selected = settings.getSelected();
+		numSets = settings.numSetsFound;
+		
+		Vector<CardView> dealt = settings.getDealt();
+		
+		//reset all the cards!
+		for (int i = 0; i < dealt.size(); i++) {
+			buttons.elementAt(i).setCard(dealt.elementAt(i).getCard());
+		}
+		
+		dealCards();	//if more cards have been added
+	}
+	
 	
 	/** Selects or unselects a card if the button is pressed. 
 	 * If the card is selected, it will become unselected, and visa versa. 
@@ -134,7 +170,8 @@ public class PlayGameActivity extends Activity {
 		}
 	}
 	
-	/** Sets the rows that should be visible or gone for the game. */
+	/** Sets the rows that should be visible or gone for the game and 
+	 * adds all buttons that are currently visible to the relevant vector. */
 	private void setVisibleRows() {
 		
 		int rows = settings.getNumCards()/3;	// Three cards per row
@@ -145,23 +182,10 @@ public class PlayGameActivity extends Activity {
 		for (int i = 0; i < rows; i++) {
 			t = (TableRow) cardTable.getChildAt(i);
 			t.setVisibility(VISIBLE);
-		}
-	}
-	
-	/** Adds all buttons that are currently visible to the relevant vector. */
-	private void addAllButtons() {
-		
-		TableLayout layout = (TableLayout) findViewById(R.id.cardTable);
-		
-		for (int row = 0; row < layout.getChildCount(); row++) {
 			
-			TableRow T = (TableRow) layout.getChildAt(row);
-			
-			if (T.getVisibility() == VISIBLE) {
-				for (int button = 0; button < T.getChildCount(); button++) {
-					CardView c = (CardView) T.getChildAt(button);
-					buttons.add(c);
-				}
+			for (int button = 0; button < t.getChildCount(); button++) {
+				CardView c = (CardView) t.getChildAt(button);
+				buttons.add(c);
 			}
 		}
 		

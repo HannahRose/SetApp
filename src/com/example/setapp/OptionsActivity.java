@@ -15,8 +15,8 @@ import android.widget.ToggleButton;
 public class OptionsActivity extends Activity {
 	
 	Vector<ToggleButton> numCardButtons = new Vector<ToggleButton>();
-	
-	public static int numCards = 12;	// Default value for the number of cards to display.
+		
+	private Settings settings;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,15 @@ public class OptionsActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		settings = new Settings().instance();
+		
 		numCardButtons.add( (ToggleButton) findViewById(R.id.nineCards));
 		numCardButtons.add( (ToggleButton) findViewById(R.id.twelveCards));
 		numCardButtons.add( (ToggleButton) findViewById(R.id.fifteenCards));
+		
+		// Calculate which button should be selected
+		int select = (settings.numCards - 9) / 3;
+		numCardButtons.elementAt(select).setChecked(true);
 	}
 
 	/**
@@ -64,31 +70,12 @@ public class OptionsActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	public void onSaveInstanceState(Bundle state) {
-		super.onSaveInstanceState(state);
-		
-		for (int i = 0; i < numCardButtons.size(); i++) {
-			if (numCardButtons.get(i).isChecked() == true) {
-				state.putInt("checked button", i);
-				break;
-			}
-		}
-	}
-	
-	@Override
-	public void onRestoreInstanceState(Bundle savedState) {
-		
-		int checked = savedState.getInt("checked button");
-		numCardButtons.get(checked).setChecked(true);
-	}
-	
 	public void setCardNum(View view) {
 		
 		if (view instanceof ToggleButton) {
 			ToggleButton t = (ToggleButton) view;
 			String num = (String) t.getText();
-			numCards = Integer.parseInt(num);
+			settings.numCards = Integer.parseInt(num);
 			
 			// Ensures that the only checked button is the one corresponding
 			// to the current number of cards (the last button clicked).

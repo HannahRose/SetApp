@@ -3,7 +3,7 @@
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
     tools:context=".PlayGameActivity" >
    	
     <TableLayout  android:id="@+id/cardTable"
@@ -88,8 +88,7 @@
 	    
 	    <TableRow
 	        android:id="@+id/tableRow5"
-	        style="@style/TableStyle" 
-	        android:visibility="gone" >
+	        style="@style/TableStyle" >
 	    	
 	    	<com.example.setapp.CardView android:id="@+id/buttonA5"
 	        	style="@style/CardStyle" >
@@ -109,7 +108,8 @@
     
     <TextView android:id="@+id/numSets"
 		style="@style/SetsFoundStyle"
-        android:layout_toLeftOf="@id/cardTable"> </TextView>
+        android:layout_toLeftOf="@id/cardTable"
+        android:layout_gravity="center_vertical"> </TextView>
     
     <FrameLayout android:id="@+id/notASet"
         android:layout_centerInParent="true"
