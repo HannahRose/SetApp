@@ -11,13 +11,17 @@ public class Settings {
 	    Context context;
 	    
 	    protected int		numCards;
+	    
+		/** Keeps track of the number of sets found by the player. */
 	    protected int 		numSetsFound;
+	    
 	    protected boolean 	gameInProgress;
 	    protected Deck		deck;
 	    protected Vector<CardView> dealt;
 	    protected Vector<CardView> selected;
 	    
-	    public Settings() {
+	    /* Constructor sets some defaults. */
+	    public Settings() {	
 	    	gameInProgress = false;
 	    	numCards = 12;
 	    	numSetsFound = 0;

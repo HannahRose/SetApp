@@ -26,6 +26,9 @@ public class CardView extends View {
 	
 	private Path cardDraw = new Path();
 	private RectF cardRect = new RectF();
+	
+	private int width;
+	private int height;
 
 	private boolean selected = false;	// Cards are not selected by default.
 		
@@ -36,9 +39,7 @@ public class CardView extends View {
 	private Bitmap fillBitmap;
 	private BitmapShader myFill;
 	private Canvas fillCanvas;
-	
-	private TableRow.LayoutParams layout;
-	
+		
 	/** Constants for paint colors. */
 	private int GREEN = 0xff008000;
 	private int RED = 0xffdd0033;
@@ -81,19 +82,32 @@ public class CardView extends View {
 		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
 		
+
 		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
 		
 		//Make this depend on the number of cards shown??
-		int width = size.x/5;
-		int height = size.y/6;
-		
-		layout = new TableRow.LayoutParams(width, height);	
-		layout.setMargins(40, 0, 40, 0);
+	 	width = size.x/5;
+		height = size.y/6;
+
+	}
 	
-		requestLayout();	//Alert the system that the layout has been changed. 
+	@Override
+	protected void onMeasure(int widthSpec, int heightSpec) {
+		
+		/*// This can ensure that the dimensions comply with the space requirements of the parent.
+		if (width > widthSpec) {
+			width = widthSpec;
+		}
+		
+		if (height > heightSpec) {
+			height = heightSpec;
+		}
+		*/
+		
+		setMeasuredDimension(width, height);
 	}
 	
 	
@@ -156,7 +170,7 @@ public class CardView extends View {
 		
 		super.onDraw(canvas);
 		
-		this.setLayoutParams(layout);
+		//this.setLayoutParams(layout);
 				
 		float xCenter = ((float) getWidth())/2;
 		float xOffset = ((float) getWidth())/6;

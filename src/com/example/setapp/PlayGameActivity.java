@@ -25,9 +25,6 @@ public class PlayGameActivity extends Activity {
 	/** Keeps track of which cards are selected (max 3). */
 	private Vector<CardView> selected = new Vector<CardView>();
 	
-	/** Keeps track of the number of sets found by the player. */
-	private int numSets = 0;	// Zero sets found so far.
-	
 	/** Keeps track of all the visible cards (CardViews). */
 	private Vector<CardView> buttons = new Vector<CardView>();
 	
@@ -62,16 +59,16 @@ public class PlayGameActivity extends Activity {
 		
 		setVisibleRows();
 		
-		/* If we are restoring a saved game. */
+		// If we are restoring a saved game. 
 		if (settings.isGameInProgress()) {
 			onRestart();
-			return;
+		}
+		else {
+			settings.gameInProgress = true;	// There is now a new game in progress
+			deck = new Deck();
 		}
 		
-		settings.gameInProgress = true;
-		
-		deck = new Deck();
-		dealCards();
+		dealCards();	// Add new cards as needed
 	}
 
 	/**
@@ -124,17 +121,21 @@ public class PlayGameActivity extends Activity {
 		super.onRestart();
 		
 		deck = settings.getDeck();
-		selected = settings.getSelected();
-		numSets = settings.numSetsFound;
 		
 		Vector<CardView> dealt = settings.getDealt();
+		CardView b;
+		CardView c;
 		
 		//reset all the cards!
 		for (int i = 0; i < dealt.size(); i++) {
-			buttons.elementAt(i).setCard(dealt.elementAt(i).getCard());
+			c = dealt.elementAt(i);
+			b = buttons.elementAt(i);
+			b.setCard(c.getCard());
+			if (c.isSelected()) {
+				b.setSelected(true);
+				selected.add(b);
+			}
 		}
-		
-		dealCards();	//if more cards have been added
 	}
 	
 	
@@ -227,7 +228,7 @@ public class PlayGameActivity extends Activity {
 				cv.invalidate();	// invalidate the selected cards so they will be redrawn.
 			}
 			
-			numSets++;
+			settings.numSetsFound++;
 			setDisplayNumSets();
 			selected.removeAllElements();
 			
@@ -252,7 +253,7 @@ public class PlayGameActivity extends Activity {
 	}
 	
 	private void setDisplayNumSets() {
-		String thisMany = "Sets found: \n" + numSets;
+		String thisMany = "Sets found: \n" + settings.numSetsFound;
 		displayNumSets.setText((CharSequence) thisMany);
 		
 		/* // This isn't doing anything....
