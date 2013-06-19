@@ -20,7 +20,7 @@ public class InstructionsActivity extends Activity {
 		setContentView(R.layout.activity_instructions);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		setImages();
 	}
 
@@ -58,15 +58,18 @@ public class InstructionsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	private void setImages() {
-
+		
 		CardView a = (CardView) findViewById(R.id.setCardA);
 		CardView b = (CardView) findViewById(R.id.setCardB);
 		CardView c = (CardView) findViewById(R.id.setCardC);
+		
 
 		a.setCard(new Card(1, Color.RED, Shape.DIAMOND, Fill.SOLID));
 		b.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.LINED));
 		c.setCard(new Card(3, Color.RED, Shape.DIAMOND, Fill.OPEN));
 	}
+
 }
+
