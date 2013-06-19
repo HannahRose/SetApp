@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="20sp" 
-        android:text="@string/instructA" />"
+        android:text="@string/instructA" />
     
     <TableRow
         android:id="@+id/isSet"
@@ -46,8 +46,5 @@
         android:layout_gravity="center_horizontal"
         android:textSize="20sp"
         android:text="@string/set"/>
-    
-</TableLayout>
-=======
     
 </TableLayout>
