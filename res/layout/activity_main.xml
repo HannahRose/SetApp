@@ -27,6 +27,17 @@
         android:onClick="resumeGame" >
     </Button> 
     
+    <Button android:id="@+id/instructionsbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/newgamebutton"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/instructions"  
+        android:onClick="instructions" >
+    </Button>
+    
     <Button android:id="@+id/optionsButton"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/resumebutton"

@@ -1,19 +1,11 @@
 package com.example.setapp;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.RectF;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TableRow;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
@@ -81,7 +73,6 @@ public class CardView extends View {
 		edges.setStrokeWidth(THIN);
 		edges.setColor(GREY);
 		edges.setStyle(Paint.Style.STROKE);
-		
 
 		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
@@ -97,7 +88,7 @@ public class CardView extends View {
 	@Override
 	protected void onMeasure(int widthSpec, int heightSpec) {
 		
-		/*// This can ensure that the dimensions comply with the space requirements of the parent.
+		/*// Uncomment this to ensure that the dimensions comply with the space requirements of the parent.
 		if (width > widthSpec) {
 			width = widthSpec;
 		}

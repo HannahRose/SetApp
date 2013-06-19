@@ -90,10 +90,11 @@ public class PlayGameActTest extends ActivityInstrumentationTestCase2<PlayGameAc
 
 	}
 	
-	
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		gameActivity.finish();
+	public void testRestoreGame() {
+		
 	}
 
+	public void testNewGame() {
+		
+	}
 }

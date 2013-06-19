@@ -65,6 +65,7 @@ public class PlayGameActivity extends Activity {
 		}
 		else {
 			settings.gameInProgress = true;	// There is now a new game in progress
+			settings.numSetsFound = 0;
 			deck = new Deck();
 		}
 		
@@ -129,12 +130,19 @@ public class PlayGameActivity extends Activity {
 		//reset all the cards!
 		for (int i = 0; i < dealt.size(); i++) {
 			c = dealt.elementAt(i);
-			b = buttons.elementAt(i);
-			b.setCard(c.getCard());
-			if (c.isSelected()) {
-				b.setSelected(true);
-				selected.add(b);
+			
+			try {
+				b = buttons.elementAt(i);
+				b.setCard(c.getCard());
+				if (c.isSelected()) {
+					b.setSelected(true);
+					selected.add(b);
+				}
 			}
+			catch (ArrayIndexOutOfBoundsException e) {	//The user has decreased the number of cards
+				deck.returnCard(c.getCard());	//return the unwanted cards to the bottom of the deck
+			}
+
 		}
 	}
 	

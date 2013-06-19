@@ -8,8 +8,5 @@ public class CardViewTest extends TestCase {
 		super.setUp();
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
 
 }

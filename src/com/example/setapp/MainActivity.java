@@ -71,6 +71,15 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    /** Switch to a new activity to read the instructions.
+     * 
+     * @param view The current view.
+     */
+    public void instructions(View view) {
+    	Intent intent = new Intent(this, InstructionsActivity.class);
+    	startActivity(intent);
+    }
+    
     // FIXME Remember to reset buttons when game is over!
     
 }

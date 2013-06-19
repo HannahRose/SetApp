@@ -3,7 +3,8 @@
  */
 package com.example.setapp.test;
 
-import java.util.*;
+import java.util.EmptyStackException;
+
 import junit.framework.TestCase;
 
 import com.example.setapp.Card;
@@ -44,7 +45,7 @@ public class DeckTest extends TestCase {
 		// Pop all the cards off the deck.
 		while(size > 0) {
 			
-			assertEquals("Deck size is not correct.", size, myDeck.size());
+//			assertEquals("Deck size is not correct.", size, myDeck.size());
 			c = myDeck.getTopCard();
 			
 			assertNotNull("Non-empty deck returned a null card.", c);
@@ -61,6 +62,31 @@ public class DeckTest extends TestCase {
 		catch (EmptyStackException e) {
 			fail("Empty deck threw an exception: " + e.getMessage());
 		}
+	}
+
+	public void testReturnCard() {
+		
+//		Debug.startMethodTracing("deck_test");
+		
+		myDeck = new Deck();
+		int size = myDeck.size();
+		
+		Card c = myDeck.getTopCard();
+		
+		// Test that the card is really not in the deck and that the deck is smaller.
+		assertFalse(myDeck.contains(c));
+		assertEquals("The deck size did not decrease after removing a card!", size-1, myDeck.size());
+		
+		// Shuffle the card back into the deck. 
+		myDeck.returnCard(c);
+		
+		// Check that the card is in the deck again
+		assertTrue(myDeck.contains(c));
+		
+		// Check that the deck size is correct (the new card didn't replace an old one).
+		assertEquals("The deck size is different from the original.", size, myDeck.size());
+		
+//		Debug.stopMethodTracing();
 	}
 
 }

@@ -10,5 +10,6 @@
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
 	<classpathentry kind="lib" path="C:/Users/Rosehx/bin/ADT/adt-bundle-windows-x86/sdk/platforms/android-17/uiautomator.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Rosehx/bin/ADT/adt-bundle-windows-x86/sdk/platforms/android-17/android.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rosehx/bin/robotium-solo-4.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

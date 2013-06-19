@@ -1,8 +1,8 @@
 package com.example.setapp;
 
 import java.util.Vector;
-
 import android.content.Context;
+
 
 public class Settings {
 

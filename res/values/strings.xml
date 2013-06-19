@@ -6,18 +6,26 @@
     <string name="play_button">New Game</string>
     <string name="title_activity_play_game">PlayGameActivity</string>
     <string name="title_activity_options">OptionsActivity</string>
-    
     <string name="default_button">I am a button!</string>
     <string name="resume_button">Resume Game</string>
     <string name="options_button"> Settings </string>
-    <string name="not_a_set" > Not a valid set! </string>
-    <string name="ok" > Okay. </string>
-    
+    <string name="not_a_set"> Not a valid set! </string>
+    <string name="ok"> Okay. </string>
     <string name="moreCards">More Cards</string>
     <string name="numCards"> Number of cards: </string>
     <string name="nineCards"> 9 </string>
     <string name="twelveCards"> 12 </string>
     <string name="fifteenCards"> 15 </string>
-    
+    <string name="title_activity_instructions">InstructionsActivity</string>
+    <string name="instructions"> Instructions </string>
+    <string name="instructA" > A set is a group of three cards which are either all the same or all
+				different in each individual characteristic. The four characteristics are number 
+				(one, two, or three), color (red, green, or purple), shape (diamond, squiggle, or 
+				oval), and fill (solid, lined, or open). In order to form a set, three cards must 
+				all have the same number, or have three different numbers, all the same color, or 
+				three different colors, etc. \n</string>
+	<string name="set" > This is a set. </string>
+	<string name="notSet" > This is not a set. </string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
