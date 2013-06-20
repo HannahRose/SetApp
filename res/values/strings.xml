@@ -24,8 +24,12 @@
 				oval), and fill (solid, lined, or open). In order to form a set, three cards must 
 				all have the same number, or have three different numbers, all the same color, or 
 				three different colors, etc. \n</string>
-	<string name="set" > This is a set. </string>
-	<string name="notSet" > This is not a set. </string>
+	<string name="instructB" > If three cards can be described as "two of ____ and one of ____ ," then they are not 
+	    		a set. \n </string>
+	<string name="set" > \nThis is a set. The cards are all red diamonds, but they have different numbers and
+	    		different fills. \n </string>
+	<string name="notSet" > \nThis is not a set. The cards have the same number, different colors, and different fills, 
+	    				but there are two diamonds and one squiggle. </string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -47,4 +47,53 @@
         android:textSize="20sp"
         android:text="@string/set"/>
     
+        
+    <TextView
+        android:id="@+id/instructB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp" 
+        android:text="@string/instructB" />
+    
+    <TableRow
+        android:id="@+id/isNotSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+    	android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_horizontal" > 
+        
+        <com.example.setapp.CardView
+            android:id="@+id/notsetCardA" > 
+        </com.example.setapp.CardView>
+        
+        <com.example.setapp.CardView
+            android:id="@+id/notsetCardB" > 
+        </com.example.setapp.CardView>
+        
+        <com.example.setapp.CardView
+            android:id="@+id/notsetCardC" > 
+        </com.example.setapp.CardView>
+        
+     </TableRow>
+     
+        <TextView android:id="@+id/caption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:text="@string/notSet"/>
+        
+       <!-- not visible in current layout 
+       <Button android:id="@+id/newgamebutton"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/play_button"  
+        android:onClick="playGame" >
+    </Button> -->
+    
 </TableLayout>

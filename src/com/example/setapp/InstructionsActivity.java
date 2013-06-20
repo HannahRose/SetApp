@@ -1,16 +1,18 @@
 package com.example.setapp;
 
-import com.example.setapp.Card.Color;
-import com.example.setapp.Card.Fill;
-import com.example.setapp.Card.Shape;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.example.setapp.Card.Color;
+import com.example.setapp.Card.Fill;
+import com.example.setapp.Card.Shape;
 
 public class InstructionsActivity extends Activity {
 
@@ -61,15 +63,39 @@ public class InstructionsActivity extends Activity {
 	
 	private void setImages() {
 		
-		CardView a = (CardView) findViewById(R.id.setCardA);
-		CardView b = (CardView) findViewById(R.id.setCardB);
-		CardView c = (CardView) findViewById(R.id.setCardC);
+		// Example of a valid set
+		CardView c = (CardView) findViewById(R.id.setCardA);
+		c.setCard(new Card(1, Color.RED, Shape.DIAMOND, Fill.SOLID));
 		
-
-		a.setCard(new Card(1, Color.RED, Shape.DIAMOND, Fill.SOLID));
-		b.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.LINED));
+		c = (CardView) findViewById(R.id.setCardB);
+		c.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.LINED));
+		
+		c = (CardView) findViewById(R.id.setCardC);
 		c.setCard(new Card(3, Color.RED, Shape.DIAMOND, Fill.OPEN));
+		
+		// Example of an invalid set
+		c = (CardView) findViewById(R.id.notsetCardA);
+		c.setCard(new Card(2, Color.GREEN, Shape.DIAMOND, Fill.LINED));
+		
+		c = (CardView) findViewById(R.id.notsetCardB);
+		c.setCard(new Card(2, Color.PURPLE, Shape.SQUIGGLE, Fill.OPEN));
+
+		c = (CardView) findViewById(R.id.notsetCardC);
+		c.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.SOLID));
+
 	}
+	
+	/* Must get button to be more visible on the screen
+	public void playGame(View v) {
+		Settings settings = new Settings().instance();
+    	settings.gameInProgress = false;
+
+    	int h = v.getMeasuredHeight();
+    	System.err.println("Height is: " + h);
+    	Intent intent = new Intent(this, PlayGameActivity.class);
+    	startActivity(intent);
+	}
+	*/
 
 }
 
