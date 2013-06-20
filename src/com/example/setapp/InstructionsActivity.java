@@ -2,13 +2,11 @@ package com.example.setapp;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
