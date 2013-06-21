@@ -2,11 +2,13 @@ package com.example.setapp;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.*;
 
 import com.example.setapp.Card.Color;
 import com.example.setapp.Card.Fill;
@@ -61,39 +63,64 @@ public class InstructionsActivity extends Activity {
 	
 	private void setImages() {
 		
+		WindowManager wm = (WindowManager) getBaseContext().getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		
+		// Set the dimensions to be smaller than normal. 
+		int width = size.y/4;
+		int height = width/2;
+		
 		// Example of a valid set
 		CardView c = (CardView) findViewById(R.id.setCardA);
 		c.setCard(new Card(1, Color.RED, Shape.DIAMOND, Fill.SOLID));
+		c.setDimensions(width, height);
 		
 		c = (CardView) findViewById(R.id.setCardB);
 		c.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.LINED));
+		c.setDimensions(width, height);
 		
 		c = (CardView) findViewById(R.id.setCardC);
 		c.setCard(new Card(3, Color.RED, Shape.DIAMOND, Fill.OPEN));
+		c.setDimensions(width, height);
 		
 		// Example of an invalid set
 		c = (CardView) findViewById(R.id.notsetCardA);
-		c.setCard(new Card(2, Color.GREEN, Shape.DIAMOND, Fill.LINED));
+		c.setCard(new Card(2, Color.GREEN, Shape.OVAL, Fill.LINED));
+		c.setDimensions(width, height);
 		
 		c = (CardView) findViewById(R.id.notsetCardB);
 		c.setCard(new Card(2, Color.PURPLE, Shape.SQUIGGLE, Fill.OPEN));
+		c.setDimensions(width, height);
 
 		c = (CardView) findViewById(R.id.notsetCardC);
-		c.setCard(new Card(2, Color.RED, Shape.DIAMOND, Fill.SOLID));
+		c.setCard(new Card(2, Color.RED, Shape.OVAL, Fill.SOLID));
+		c.setDimensions(width, height);
 
 	}
 	
-	/* Must get button to be more visible on the screen
 	public void playGame(View v) {
 		Settings settings = new Settings().instance();
     	settings.gameInProgress = false;
 
-    	int h = v.getMeasuredHeight();
-    	System.err.println("Height is: " + h);
     	Intent intent = new Intent(this, PlayGameActivity.class);
     	startActivity(intent);
 	}
-	*/
+	
+    public void resumeGame(View view) {
+    	Intent intent = new Intent(this, PlayGameActivity.class);
+    	startActivity(intent);
+    }
 
+    /** Switch to a new activity to change the game settings.
+     * 
+     * @param view The current view.
+     */
+    public void options(View view) {
+    	Intent intent = new Intent(this, OptionsActivity.class);
+    	startActivity(intent);
+    }
+    
 }
 

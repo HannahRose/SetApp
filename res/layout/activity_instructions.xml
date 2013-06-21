@@ -58,7 +58,7 @@
     
     <TableRow
         android:id="@+id/isNotSet"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:paddingLeft="@dimen/activity_horizontal_margin"
     	android:paddingRight="@dimen/activity_horizontal_margin"
@@ -85,15 +85,40 @@
         android:textSize="20sp"
         android:text="@string/notSet"/>
         
-       <!-- not visible in current layout 
-       <Button android:id="@+id/newgamebutton"
+     <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+    	android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_horizontal" > 
+        
+    	<Button android:id="@+id/resumebutton"
+        android:text="@string/resume_button" 
         android:layout_gravity="center_horizontal"
-        android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="20sp" 
+        android:onClick="resumeGame" >
+   		 </Button> 
+    
+       <Button android:id="@+id/newgamebutton"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="@string/play_button"  
         android:onClick="playGame" >
-    </Button> -->
+        </Button>
+        
+        <Button android:id="@+id/optionsButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/options_button"  
+        android:onClick="options" >
+         </Button>
+    
+    </TableRow>
     
 </TableLayout>

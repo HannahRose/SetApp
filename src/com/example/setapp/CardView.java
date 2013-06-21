@@ -80,25 +80,21 @@ public class CardView extends View {
 		display.getSize(size);
 		
 		//Make this depend on the number of cards shown??
-	 	width = size.x/5;
-		height = size.y/6;
+	 	width = size.y/3;
+		height = width/2;
 
 	}
 	
 	@Override
 	protected void onMeasure(int widthSpec, int heightSpec) {
 		
-		/*// Uncomment this to ensure that the dimensions comply with the space requirements of the parent.
-		if (width > widthSpec) {
-			width = widthSpec;
-		}
-		
-		if (height > heightSpec) {
-			height = heightSpec;
-		}
-		*/
-		
 		setMeasuredDimension(width, height);
+	}
+	
+	/** Override the default dimensions of the card. */
+	public void setDimensions(int w, int h) {
+		width = w;
+		height = h;
 	}
 	
 	

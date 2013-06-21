@@ -53,10 +53,10 @@ public final class R {
         public static final int gameLayout=0x7f080016;
         public static final int instructA=0x7f080000;
         public static final int instructB=0x7f080006;
-        public static final int instructionsbutton=0x7f08000f;
+        public static final int instructionsbutton=0x7f080010;
         public static final int isNotSet=0x7f080007;
         public static final int isSet=0x7f080001;
-        public static final int mainLayout=0x7f08000c;
+        public static final int mainLayout=0x7f08000f;
         public static final int newgamebutton=0x7f08000d;
         public static final int nineCards=0x7f080013;
         public static final int notASet=0x7f08002d;
@@ -65,8 +65,8 @@ public final class R {
         public static final int notsetCardB=0x7f080009;
         public static final int notsetCardC=0x7f08000a;
         public static final int numSets=0x7f08002c;
-        public static final int optionsButton=0x7f080010;
-        public static final int resumebutton=0x7f08000e;
+        public static final int optionsButton=0x7f08000e;
+        public static final int resumebutton=0x7f08000c;
         public static final int setCardA=0x7f080002;
         public static final int setCardB=0x7f080003;
         public static final int setCardC=0x7f080004;
